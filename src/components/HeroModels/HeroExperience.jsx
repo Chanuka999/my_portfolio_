@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive";
 
 import HeroLights from "./HeroLights";
 import { Room } from "./Room";
+import Particles from "./Particals";
 
 const HeroExperience = () => {
   const isTablet = useMediaQuery({ query: "(max-width:1024px)" });
@@ -20,6 +21,7 @@ const HeroExperience = () => {
         maxPolarAngle={Math.PI / 2}
       />
       <HeroLights />
+      <Particles count={100} />
       <group
         scale={isMobile ? 0.7 : 1}
         position={[0, -3.5, 0]}
