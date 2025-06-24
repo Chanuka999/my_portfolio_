@@ -24,7 +24,7 @@ const Hero = () => {
     );
   });
   return (
-    <section id="hero" className="relative overflow-hidden">
+    <section id="hero" className="relative overflow-hidden ">
       <div className="absolute top-0 left-0 z-10">
         <img src="/images/bg.png" alt="background" />
       </div>
@@ -35,7 +35,7 @@ const Hero = () => {
           <div className="flex flex-col gap-7">
             <div className="hero-text">
               <h2>
-                Spark of{" "}
+                HI I'M{" "}
                 <span className="slide">
                   <span className="wrapper">
                     {words.map((word) => (
@@ -54,15 +54,28 @@ const Hero = () => {
                   </span>
                 </span>
               </h2>
-              <h2>inspiration to</h2>
-              <h2> fully functional</h2>
-              <h2>scalable solutions </h2>
+              <h2>CHANUKA</h2>
+              <h2> RANDITHA</h2>
+              <h3>full stack developer </h3>
             </div>
 
-            <h2 className="text-white-50 md:text-xl relative z-10 pointer-events-none p-4 text-4xl text-align: center">
-              Hi I'm Chanuka Randitha,
-              <br />A Full stack Developer
+            <h2 className="text-green-500 text-2xl md:text-5xl font-bold relative z-10 pointer-events-none p-2">
+              WHO AM I
             </h2>
+            <p className="text-yellow-600  font-serif">
+              I’m a passionate Computer Science student with a strong interest
+              <br />
+              in building real-world software solutions. I specialize in
+              full-stack web development, <br />
+              writing clean, efficient, and scalable code. I enjoy turning ideas
+              into interactive, user-friendly applications
+              <br /> with a focus on modern design and seamless user experience.
+              I’ve contributed to projects across both frontend and backend,
+              continuously improving my technical and problem-solving skills.
+              I’m a fast learner, team player, and always eager to explore new
+              technologies and grow as a developer.
+            </p>
+
             <Button
               className="md:w-80 md:h-16 w-60 h-12"
               id="button"
@@ -77,7 +90,6 @@ const Hero = () => {
           </div>
         </figure>
       </div>
-      <AnimatedCounter />
     </section>
   );
 };
