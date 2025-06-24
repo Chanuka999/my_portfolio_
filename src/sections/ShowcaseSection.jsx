@@ -24,7 +24,7 @@ import project1 from "../../public/images/carApplication.png";
 import project2 from "../../public/images/whatsapp.png";
 import project3 from "../../public/images/tour.png";
 import project4 from "../../public/images/student.png";
-import project5 from "../../public/images/carApplication.png";
+import project5 from "../../public/images/bus.png";
 
 // Export the imported project images
 export { project1, project2, project3, project4, project5 };
@@ -79,15 +79,15 @@ const projects = [
     gradient: "from-red-500 to-orange-600",
   },
   {
-    title: "Studiora",
+    title: "Bus ticket Booking webSite",
     icon: <FaStethoscope className="inline mr-2 text-green-600" />,
-    desc: "Student Management System",
+    desc: "Bus ticket Booking webSite",
     longDesc:
-      "A responsive system to manage student records with full CRUD operations and a clean Bootstrap-based UI.",
-    tech: "PHP, Laravel, MySQL, Bootstrap",
+      "online bus ticket booking system that allows users to search for bus routes, check seat availability, and book tickets conveniently",
+    tech: "react.js, thailwind css",
     image: project5,
-    link: "",
-    category: "Education",
+    link: "https://github.com/Chanuka999/Online-Bus-Ticket-Booking-WebSite.git",
+    category: "economic",
     gradient: "from-indigo-500 to-blue-600",
   },
 ];
@@ -184,7 +184,7 @@ const ShowcaseSection = () => {
     <section
       id="work"
       ref={sectionRef}
-      className="py-20 px-6 bg-gradient-to-br relative overflow-hidden"
+      className="py-20 px-6 bg-gradient-to-br relative overflow-hidden from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
