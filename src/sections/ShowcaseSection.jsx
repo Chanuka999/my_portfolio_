@@ -21,9 +21,9 @@ import {
 
 // Import actual project images
 import project1 from "../../public/images/carApplication.png";
-import project2 from "../../public/images/carApplication.png";
-import project3 from "../../public/images/carApplication.png";
-import project4 from "../../public/images/carApplication.png";
+import project2 from "../../public/images/whatsapp.png";
+import project3 from "../../public/images/tour.png";
+import project4 from "../../public/images/student.png";
 import project5 from "../../public/images/carApplication.png";
 
 // Export the imported project images
@@ -31,51 +31,51 @@ export { project1, project2, project3, project4, project5 };
 
 const projects = [
   {
-    title: "Meditech-Laboratory System",
+    title: "Car Marketplace System",
     icon: <FaFlask className="inline mr-2 text-blue-500" />,
-    desc: "Scalable lab management platform with admin panel.",
+    desc: "Scalable car Application platform with admin panel.",
     longDesc:
-      "Meditech streamlines lab operations with multi-branch coordination, patient test tracking, online report downloads, and real-time lab updates. Designed to enhance efficiency and accuracy in diagnostic workflows.",
-    tech: "Next.js, Tailwind CSS, MongoDB",
+      "  A web app to buy and sell cars with secure login, car listings,search filters, and AI chat support.",
+    tech: "Next.js, Tailwind CSS, Appwrite",
     image: project1,
-    link: "",
-    category: "Healthcare",
+    link: "https://github.com/Chanuka999/FullStack_Car_Website.git",
+    category: "MarketPlace",
     gradient: "from-blue-500 to-cyan-600",
   },
   {
-    title: "MediQ",
-    icon: <FaStethoscope className="inline mr-2 text-green-600" />,
-    desc: "Full-stack doctor appointment booking with Stripe integration.",
+    title: "Whatsapp AI Assestance",
+    icon: <FaComments className="inline mr-2 text-green-600" />,
+    desc: "A WhatsApp chatbot designed to automate conversations and provide instant responses to user queries",
     longDesc:
-      "MediQ enables users to schedule medical appointments, securely pay online with Stripe, and receive timely notifications. The admin interface manages doctor schedules, patient records, and appointments effectively.",
-    tech: "MERN Stack (MongoDB, Express.js, React, Node.js), Stripe, Tailwind CSS",
+      " The bot can handle common questions, provide information, and simulate human-like interactions to enhance user experience.",
+    tech: "Nest.js, metaAccount, AI_Key",
     image: project2,
-    link: "",
-    category: "Healthcare",
+    link: "https://github.com/Chanuka999/whatsapp_chatbot.git",
+    category: "Social Media",
     gradient: "from-green-500 to-emerald-600",
   },
   {
-    title: "WaveTalk",
+    title: "Tour and Travel Booking Website",
     icon: <FaComments className="inline mr-2 text-purple-500" />,
-    desc: "Real-time chat platform for inclusive communication.",
+    desc: "Real-time travel platform for visiting places.",
     longDesc:
-      "WaveTalk supports barrier-free communication using real-time chat, Firebase backend, and hand sign recognition via a Python ML model. Ideal for inclusive, accessible communication across communities.",
-    tech: "React, Firebase, Python",
+      "A responsive Tours and Travel Booking website that allows users to explore destinations, view travel packages, and make bookings easily Designed with a modern interface to provide a smooth and user-friendly experience",
+    tech: "MERN Stack (MongoDB, Express.js, React, Node.js), bootstrap",
     image: project3,
-    link: "",
+    link: "https://github.com/Chanuka999/Tours_and_Travels_Booking_Webiste.git",
     category: "Communication",
     gradient: "from-purple-500 to-pink-600",
   },
   {
-    title: "Beast Buddy",
+    title: "Student Result Management System",
     icon: <FaPaw className="inline mr-2 text-red-500" />,
-    desc: "Animal rescue and veterinary communication platform.",
+    desc: "Student Result Management System.",
     longDesc:
-      "Beast Buddy connects rescuers, veterinarians, and volunteers to report animal distress, coordinate rescue efforts, and share health-related updates. Supports animal welfare NGOs with effective digital tools.",
+      "A responsive system to manage student records with full CRUD operations and a clean Bootstrap-based UI.",
     tech: "PHP, MySQL, HTML, CSS, JavaScript",
     image: project4,
-    link: "",
-    category: "Social Impact",
+    link: "https://github.com/Chanuka999/student_result_management_System.git",
+    category: "Education",
     gradient: "from-red-500 to-orange-600",
   },
   {
@@ -182,6 +182,7 @@ const ShowcaseSection = () => {
     //   </div>
     // </section>
     <section
+      id="work"
       ref={sectionRef}
       className="py-20 px-6 bg-gradient-to-br relative overflow-hidden"
     >
@@ -338,7 +339,7 @@ const ShowcaseSection = () => {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               {/* GitHub Button */}
               <a
-                href=""
+                href="https://github.com/Chanuka999"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-700 hover:from-gray-800 hover:to-gray-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
@@ -350,7 +351,7 @@ const ShowcaseSection = () => {
 
               {/* LinkedIn Button */}
               <a
-                href=""
+                href="https://www.linkedin.com/in/chanuka-randitha/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"

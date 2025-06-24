@@ -34,7 +34,7 @@ const Hero = () => {
         <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5">
           <div className="flex flex-col gap-7">
             <div className="hero-text">
-              <h1>
+              <h2>
                 Spark of{" "}
                 <span className="slide">
                   <span className="wrapper">
@@ -53,15 +53,16 @@ const Hero = () => {
                     ))}
                   </span>
                 </span>
-              </h1>
-              <h1>inspiration to</h1>
-              <h1> fully functional</h1>
-              <h1>scalable solutions </h1>
+              </h2>
+              <h2>inspiration to</h2>
+              <h2> fully functional</h2>
+              <h2>scalable solutions </h2>
             </div>
 
-            <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
-              Hi I'm Chanuka Randitha,A Full stack Developer
-            </p>
+            <h2 className="text-white-50 md:text-xl relative z-10 pointer-events-none p-4 text-4xl text-align: center">
+              Hi I'm Chanuka Randitha,
+              <br />A Full stack Developer
+            </h2>
             <Button
               className="md:w-80 md:h-16 w-60 h-12"
               id="button"
