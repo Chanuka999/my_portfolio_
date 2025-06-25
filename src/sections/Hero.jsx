@@ -34,7 +34,7 @@ const Hero = () => {
         <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5">
           <div className="flex flex-col gap-7">
             <div className="hero-text">
-              <h2>
+              <h4>
                 HI I'M{" "}
                 <span className="slide">
                   <span className="wrapper">
@@ -53,32 +53,18 @@ const Hero = () => {
                     ))}
                   </span>
                 </span>
-              </h2>
-              <h2>CHANUKA</h2>
-              <h2> RANDITHA</h2>
-              <h3>full stack developer </h3>
+              </h4>
+              <h2 className="text-green-500">CHANUKA</h2>
+              <h2 className="text-green-500">......RANDITHA......</h2>
+              <h3 className="text-yellow-600">full stack developer </h3>
             </div>
 
-            <h2 className="text-green-500 text-2xl md:text-5xl font-bold relative z-10 pointer-events-none p-2">
-              WHO AM I
-            </h2>
-            <p className="text-yellow-600  font-serif">
-              I’m a passionate Computer Science student with a strong interest
-              <br />
-              in building real-world software solutions. I specialize in
-              full-stack web development, <br />
-              writing clean, efficient, and scalable code. I enjoy turning ideas
-              into interactive, user-friendly applications
-              <br /> with a focus on modern design and seamless user experience.
-              I’ve contributed to projects across both frontend and backend,
-              continuously improving my technical and problem-solving skills.
-              I’m a fast learner, team player, and always eager to explore new
-              technologies and grow as a developer.
-            </p>
+            <h2 className="text-green-500 text-2xl md:text-5xl font-bold relative z-10 pointer-events-none p-2"></h2>
+            <p></p>
 
             <Button
               className="md:w-80 md:h-16 w-60 h-12"
-              id="button"
+              id="work"
               text="see my Work"
             />
           </div>

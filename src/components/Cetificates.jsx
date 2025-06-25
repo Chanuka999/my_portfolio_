@@ -132,7 +132,7 @@ export default function LicensesCertifications() {
   return (
     <section
       className="py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-br from-slate-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-slate-900 relative overflow-hidden"
-      id="certifications"
+      id="cetificates"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
