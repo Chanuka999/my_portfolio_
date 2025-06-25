@@ -68,7 +68,7 @@ const Hero = () => {
                   sequence={[
                     "Full-Stack Developer",
                     2000,
-                    "Aspiring Software Engineer",
+                    "Software Engineer",
                     2000,
                   ]}
                   wrapper="span"
