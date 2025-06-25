@@ -1,4 +1,6 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
 import { words } from "../constants";
 import Button from "../components/Button";
 import HeroExperience from "../components/HeroModels/HeroExperience";
@@ -56,7 +58,24 @@ const Hero = () => {
               </h4>
               <h2 className="text-green-500">CHANUKA</h2>
               <h2 className="text-green-500">......RANDITHA......</h2>
-              <h3 className="text-yellow-600">full stack developer </h3>
+              <motion.div
+                className="text-3xl md:text-4xl text-yellow-600 mb-8 max-w-2xl z-10 pt-2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+              >
+                <TypeAnimation
+                  sequence={[
+                    "Full-Stack Developer",
+                    2000,
+                    "Aspiring Software Engineer",
+                    2000,
+                  ]}
+                  wrapper="span"
+                  speed={50}
+                  repeat={Infinity}
+                />
+              </motion.div>
             </div>
 
             <h2 className="text-green-500 text-2xl md:text-5xl font-bold relative z-10 pointer-events-none p-2"></h2>
