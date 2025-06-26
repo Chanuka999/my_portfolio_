@@ -25,9 +25,12 @@ import project2 from "../../public/images/whatsapp.png";
 import project3 from "../../public/images/tour.png";
 import project4 from "../../public/images/student.png";
 import project5 from "../../public/images/bus.png";
+import project6 from "../../public/images/space.png";
+import project7 from "../../public/images/chat1.png";
+import project8 from "../../public/images/food.png";
 
 // Export the imported project images
-export { project1, project2, project3, project4, project5 };
+export { project1, project2, project3, project4, project5, project6, project7 };
 
 const projects = [
   {
@@ -83,12 +86,47 @@ const projects = [
     icon: <FaStethoscope className="inline mr-2 text-green-600" />,
     desc: "Bus ticket Booking webSite",
     longDesc:
-      "online bus ticket booking system that allows users to search for bus routes, check seat availability, and book tickets conveniently",
+      "Explore the Universe: Your Gateway to Space Welcome to Space website, your ultimate destination for exploring the wonders of the universe",
     tech: "react.js, thailwind css",
     image: project5,
     link: "https://github.com/Chanuka999/Online-Bus-Ticket-Booking-WebSite.git",
     category: "economic",
     gradient: "from-indigo-500 to-blue-600",
+  },
+  {
+    title: "space webSite",
+    icon: <FaFlask className="inline mr-2 text-blue-500" />,
+    desc: "space webSite",
+    longDesc:
+      "online bus ticket booking system that allows users to search for bus routes, check seat availability, and book tickets convenientlyExplore the Universe: Your Gateway to Space Welcome to Space website, your ultimate destination for exploring the wonders of the universe!",
+    tech: "react.js, thailwind css",
+    image: project6,
+    link: "https://github.com/Chanuka999/space_website.git",
+    category: "economic",
+    gradient: "from-red-500 to-orange-600",
+  },
+  {
+    title: "Chat Application",
+    icon: <FaComments className="inline mr-2 text-purple-500" />,
+    desc: "Chat Application",
+    longDesc: "",
+    tech: "php, javascript, html ,css",
+    image: project7,
+    link: "https://github.com/Chanuka999/space_website.githttps://github.com/Chanuka999/Chat_Application.git",
+    category: "economic",
+    gradient: "from-blue-500 to-cyan-600",
+  },
+  {
+    title: "Food Order Website",
+    icon: <FaComments className="inline mr-2 text-green-600" />,
+    desc: "Food Order Website",
+    longDesc:
+      "A food order website allows users to browse a menu, select items, and place an order online. The site is typically built using HTML for structure, CSS for styling, JavaScript for interactivity, and PHP for server-side processing.",
+    tech: "html, css, php ,mysql",
+    image: project8,
+    link: "https://github.com/Chanuka999/food_order_web_site.git",
+    category: "economic",
+    gradient: "from-purple-500 to-pink-600",
   },
 ];
 
