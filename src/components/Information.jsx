@@ -57,7 +57,7 @@ const Information = () => {
           <div className="w-16 sm:w-20 h-1 bg-blue-600 dark:bg-blue-400 mx-auto rounded-full"></div>
           <div className="backdrop-blur-xl bg-black/30 rounded-3xl border border-gray-700/30 shadow-2xl p-8 md:p-12 mx-auto max-w-3xl">
             <div className="relative">
-              <p className="text-yellow-600 text-xl md:text-2xl leading-relaxed font-medium text-left">
+              <p className="text-white-50 text-xl md:text-2xl leading-relaxed font-medium text-left">
                 {displayedText}
                 <span
                   className={`inline-block w-0.5 h-6 bg-blue-400 ml-1 ${
