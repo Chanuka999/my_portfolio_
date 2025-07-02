@@ -9,6 +9,7 @@ import Education from "./components/Education";
 import Cetificates from "./components/Cetificates";
 import Skills from "./components/Skills";
 import Information from "./components/Information";
+import Contact from "./sections/Contact";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
       <LogoSection />
 
       <FeatureCards />
+      <Contact />
     </>
   );
 };
