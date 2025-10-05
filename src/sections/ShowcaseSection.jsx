@@ -19,18 +19,22 @@ import {
 
 // Import Framer Motion
 
-// Import actual project images
-import project1 from "../../public/images/carApplication.png";
-import project2 from "../../public/images/whatsapp.png";
-import project3 from "../../public/images/tour.png";
-import project4 from "../../public/images/student.png";
-import project5 from "../../public/images/bus.png";
-import project6 from "../../public/images/space.png";
-import project7 from "../../public/images/chat1.png";
-import project8 from "../../public/images/food.png";
+// Build project image paths using Vite base URL so they resolve under a
+// repository subpath (e.g. GitHub Pages) and in dev mode.
+const project1 = import.meta.env.BASE_URL + "images/carApplication.png";
+const project2 = import.meta.env.BASE_URL + "images/whatsapp.png";
+const project3 = import.meta.env.BASE_URL + "images/tour.png";
+const project4 = import.meta.env.BASE_URL + "images/student.png";
+const project5 = import.meta.env.BASE_URL + "images/bus.png";
+const project6 = import.meta.env.BASE_URL + "images/space.png";
+const project7 = import.meta.env.BASE_URL + "images/chat1.png";
+const project8 = import.meta.env.BASE_URL + "images/food.png";
 
-// Export the imported project images
-export { project1, project2, project3, project4, project5, project6, project7 };
+// Export the project image paths if other modules need them
+// Note: These are intentionally not exported to keep this file a pure component
+// module — exporting non-component values from a component file can break
+// Vite's fast refresh. If other modules need these paths, move them to a
+// separate constants file.
 
 const projects = [
   {

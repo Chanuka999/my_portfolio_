@@ -2,12 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./public/images/my.jpg" />
+    <!-- Use Vite's %BASE_URL% placeholder so the favicon resolves correctly when
+      the app is served from a sub-path (for example GitHub Pages). -->
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%images/my.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chanuka Randitha</title>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <!-- Use %BASE_URL% so the script is loaded from the correct base in production -->
+    <script type="module" src="%BASE_URL%src/main.jsx"></script>
   </body>
 </html>

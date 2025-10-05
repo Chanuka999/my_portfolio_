@@ -42,7 +42,7 @@ const Information = () => {
               </defs>
 
               <image
-                href="/images/my.jpg"
+                href={import.meta.env.BASE_URL + "images/my.jpg"}
                 x="0"
                 y="0"
                 width="40"
