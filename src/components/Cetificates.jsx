@@ -23,23 +23,33 @@ import {
 } from "react-icons/si";
 import { GiGraduateCap } from "react-icons/gi";
 
+const cetificate1 = import.meta.env.BASE_URL + "images/python.jpg";
+const cetificate2 = import.meta.env.BASE_URL + "images/webDesign.jpg";
+const cetificate3 = import.meta.env.BASE_URL + "images/frontend.jpg";
+const cetificate4 = import.meta.env.BASE_URL + "images/server.jpg";
+const cetificate5 = import.meta.env.BASE_URL + "images/react.jpg";
+const cetificate6 = import.meta.env.BASE_URL + "images/php.jpg";
+const cetificate7 = import.meta.env.BASE_URL + "images/html.jpg";
+
 const certifications = [
   {
     title: "",
-    issuer: "Postman",
+    issuer: "Python",
     issueDate: "Feb 2025",
-    skills: ["Postman API"],
-    icon: <SiPostman className="text-orange-500" />,
-    category: "API Development",
+    skills: ["Python"],
+    icon: <FaPython className="text-orange-500" />,
+    image: cetificate1,
+    category: "python Development",
     gradient: "from-orange-400 to-red-500",
     recent: true,
   },
   {
-    title: "Python Programming",
+    title: "Web Design for Begginers",
     issuer: "University of Moratuwa",
     issueDate: "Jul 2024",
-    skills: ["Python (Programming Language)"],
+    skills: [["HTML"], ["CSS"], ["JAVASCRIPT"]],
     icon: <FaPython className="text-yellow-400" />,
+    image: cetificate2,
     category: "Programming",
     gradient: "from-yellow-400 to-blue-500",
     recent: true,
@@ -50,6 +60,7 @@ const certifications = [
     issueDate: "May 2024",
     skills: ["Version Control"],
     icon: <SiCoursera className="text-blue-600" />,
+    image: cetificate3,
     category: "Development Tools",
     gradient: "from-blue-500 to-purple-600",
     recent: true,
@@ -60,6 +71,7 @@ const certifications = [
     issueDate: "Apr 2024",
     skills: ["JavaScript"],
     icon: <FaJsSquare className="text-yellow-500" />,
+    image: cetificate4,
     category: "Programming",
     gradient: "from-yellow-500 to-orange-500",
     recent: true,
@@ -70,6 +82,7 @@ const certifications = [
     issueDate: "Oct 2023",
     skills: ["Figma", "User Interface Design"],
     icon: <FaFigma className="text-pink-500" />,
+    image: cetificate5,
     category: "Design",
     gradient: "from-pink-500 to-purple-600",
     recent: false,
@@ -80,6 +93,7 @@ const certifications = [
     issueDate: "Oct 2023",
     skills: ["CSS", "HTML", "Responsive Web Design"],
     icon: <FaHtml5 className="text-orange-600" />,
+    image: cetificate6,
     category: "Web Development",
     gradient: "from-orange-600 to-red-600",
     recent: false,
@@ -90,6 +104,7 @@ const certifications = [
     issueDate: "Oct 2023",
     skills: ["Java"],
     icon: <FaJava className="text-red-600" />,
+    image: cetificate7,
     category: "Programming",
     gradient: "from-red-600 to-orange-600",
     recent: false,
@@ -100,6 +115,7 @@ const certifications = [
     issueDate: "Dec 2021",
     skills: ["English"],
     icon: <GiGraduateCap className="text-green-700" />,
+
     category: "Language",
     gradient: "from-green-600 to-teal-600",
     recent: false,
@@ -110,6 +126,7 @@ const certifications = [
     issueDate: "Sep 2021",
     skills: ["Digital Marketing", "SEO", "SEM"],
     icon: <SiGooglechrome className="text-blue-500" />,
+
     category: "Marketing",
     gradient: "from-blue-500 to-cyan-500",
     recent: false,
@@ -117,7 +134,6 @@ const certifications = [
 ];
 
 export default function LicensesCertifications() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
   const [filter, setFilter] = useState("All");
 
   const categories = [
@@ -176,12 +192,7 @@ export default function LicensesCertifications() {
         {/* Enhanced Certifications Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
           {filteredCertifications.map((cert, index) => (
-            <div
-              key={index}
-              className="group relative"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
+            <div key={index} className="group relative">
               {/* Card Container with Enhanced Hover */}
               <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 overflow-hidden border border-gray-200 dark:border-gray-700">
                 {/* Gradient Border Effect */}
@@ -205,11 +216,30 @@ export default function LicensesCertifications() {
                 <div className="relative z-10 p-6">
                   {/* Header Section */}
                   <div className="flex items-start gap-4 mb-6">
-                    {/* Icon with Animated Background */}
+                    {/* Icon or Thumbnail */}
                     <div
-                      className={`flex-shrink-0 p-4 bg-gradient-to-br ${cert.gradient} rounded-2xl shadow-lg transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}
+                      className={`flex-shrink-0 p-2 rounded-2xl shadow-lg transform transition-transform duration-300 group-hover:scale-105 group-hover:rotate-0 ${
+                        cert.image
+                          ? "bg-transparent"
+                          : `bg-gradient-to-br ${cert.gradient}`
+                      }`}
                     >
-                      <div className="text-3xl text-white">{cert.icon}</div>
+                      {cert.image ? (
+                        <a
+                          href={cert.image}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block w-16 h-16 overflow-hidden rounded-md"
+                        >
+                          <img
+                            src={cert.image}
+                            alt={`${cert.issuer} certificate`}
+                            className="w-16 h-16 object-cover rounded-md"
+                          />
+                        </a>
+                      ) : (
+                        <div className="text-3xl text-white">{cert.icon}</div>
+                      )}
                     </div>
 
                     {/* Title and Issuer */}
