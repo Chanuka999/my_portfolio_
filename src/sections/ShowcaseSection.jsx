@@ -29,6 +29,7 @@ const project5 = import.meta.env.BASE_URL + "images/bus.png";
 const project6 = import.meta.env.BASE_URL + "images/space.png";
 const project7 = import.meta.env.BASE_URL + "images/chat1.png";
 const project8 = import.meta.env.BASE_URL + "images/food.png";
+const project9 = import.meta.env.BASE_URL + "images/ecocart.png";
 
 // Export the project image paths if other modules need them
 // Note: These are intentionally not exported to keep this file a pure component
@@ -131,6 +132,18 @@ const projects = [
     link: "https://github.com/Chanuka999/food_order_web_site.git",
     category: "economic",
     gradient: "from-purple-500 to-pink-600",
+  },
+  {
+    title: "eco cart",
+    icon: <FaFlask className="inline mr-2 text-blue-500" />,
+    desc: "eco cart",
+    longDesc:
+      "EcoCart is a full-featured, modern eCommerce web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). The platform offers a seamless and responsive online shopping experience, allowing users to browse, search, and purchase products with ease. EcoCart is designed with simplicity, speed, and user-friendliness in mind",
+    tech: "react.js, thailwind css, mongodb, express js, node js",
+    image: project9,
+    link: "https://github.com/Chanuka999/ecocart.git",
+    category: "ecommerce",
+    gradient: "from-red-500 to-orange-600",
   },
 ];
 
