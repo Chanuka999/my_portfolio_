@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { FaRocket } from "react-icons/fa";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -30,6 +31,7 @@ const project6 = import.meta.env.BASE_URL + "images/space.png";
 const project7 = import.meta.env.BASE_URL + "images/chat1.png";
 const project8 = import.meta.env.BASE_URL + "images/food.png";
 const project9 = import.meta.env.BASE_URL + "images/ecocart.png";
+const project10 = import.meta.env.BASE_URL + "images/foodHop.png";
 
 // Export the project image paths if other modules need them
 // Note: These are intentionally not exported to keep this file a pure component
@@ -47,7 +49,21 @@ const projects = [
     tech: "Next.js, Tailwind CSS, Appwrite",
     image: project1,
     link: "https://github.com/Chanuka999/FullStack_Car_Website.git",
+    liveLink: "",
     category: "MarketPlace",
+    gradient: "from-blue-500 to-cyan-600",
+  },
+  {
+    title: "FoodHop",
+    icon: <FaStethoscope className="inline mr-2 text-green-600" />,
+    desc: "A modern food ordering and delivery platform.",
+    longDesc:
+      "FoodHop is a full-stack food ordering web application where users can browse menu items, add them to the cart, and place orders with real-time status tracking. The platform features a clean UI, responsive design, secure authentication, and an admin dashboard for managing items, orders, and categories.",
+    tech: "Reactjs, expressJs, Nodejs, MongoDb",
+    image: project10,
+    link: "https://github.com/Chanuka999/foodHop.git",
+    liveLink: "https://food-hop.vercel.app/",
+    category: "food ordering",
     gradient: "from-blue-500 to-cyan-600",
   },
   {
@@ -59,6 +75,7 @@ const projects = [
     tech: "Nest.js, metaAccount, AI_Key",
     image: project2,
     link: "https://github.com/Chanuka999/whatsapp_chatbot.git",
+    liveLink: "",
     category: "Social Media",
     gradient: "from-green-500 to-emerald-600",
   },
@@ -71,6 +88,7 @@ const projects = [
     tech: "MERN Stack (MongoDB, Express.js, React, Node.js), bootstrap",
     image: project3,
     link: "https://github.com/Chanuka999/Tours_and_Travels_Booking_Webiste.git",
+    liveLink: "",
     category: "Communication",
     gradient: "from-purple-500 to-pink-600",
   },
@@ -83,6 +101,7 @@ const projects = [
     tech: "PHP, MySQL, HTML, CSS, JavaScript",
     image: project4,
     link: "https://github.com/Chanuka999/student_result_management_System.git",
+    liveLink: "",
     category: "Education",
     gradient: "from-red-500 to-orange-600",
   },
@@ -95,6 +114,7 @@ const projects = [
     tech: "react.js, thailwind css",
     image: project5,
     link: "https://github.com/Chanuka999/Online-Bus-Ticket-Booking-WebSite.git",
+    liveLink: "",
     category: "economic",
     gradient: "from-indigo-500 to-blue-600",
   },
@@ -107,6 +127,7 @@ const projects = [
     tech: "react.js, thailwind css",
     image: project6,
     link: "https://github.com/Chanuka999/space_website.git",
+    liveLink: "https://myspacewebsite.netlify.app/",
     category: "economic",
     gradient: "from-red-500 to-orange-600",
   },
@@ -118,6 +139,7 @@ const projects = [
     tech: "php, javascript, html ,css",
     image: project7,
     link: "https://github.com/Chanuka999/space_website.githttps://github.com/Chanuka999/Chat_Application.git",
+    liveLink: "",
     category: "economic",
     gradient: "from-blue-500 to-cyan-600",
   },
@@ -130,6 +152,7 @@ const projects = [
     tech: "html, css, php ,mysql",
     image: project8,
     link: "https://github.com/Chanuka999/food_order_web_site.git",
+    liveLink: "",
     category: "economic",
     gradient: "from-purple-500 to-pink-600",
   },
@@ -142,6 +165,7 @@ const projects = [
     tech: "react.js, thailwind css, mongodb, express js, node js",
     image: project9,
     link: "https://github.com/Chanuka999/ecocart.git",
+    liveLink: "",
     category: "ecommerce",
     gradient: "from-red-500 to-orange-600",
   },
@@ -284,12 +308,19 @@ const ShowcaseSection = () => {
                 {/* Content Container */}
                 <div className="relative z-10 p-6">
                   {/* Project Image with Overlay */}
+
                   <div className="relative overflow-hidden rounded-xl mb-6 group">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
+                    <a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                    </a>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                     {/* Category Badge */}
@@ -358,21 +389,41 @@ const ShowcaseSection = () => {
                 </div>
 
                 {/* Enhanced Action Button */}
-                <div className="relative z-10 p-6 pt-0">
+                <div className="relative z-10 p-6 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* View Project Button */}
                   <a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group/btn inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r ${project.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden`}
+                    className={`group/btn relative inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r ${project.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden`}
                   >
-                    {/* Button Background Animation */}
-                    <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover/btn:translate-x-0 transition-transform duration-500"></div>
+                    {/* Background overlay */}
+                    <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500"></div>
 
-                    <div className="relative flex items-center gap-2">
+                    {/* Content */}
+                    <span className="relative flex items-center justify-center gap-2 z-10">
                       <FaGithub className="text-lg" />
-                      <span>View Project</span>
+                      View Project
                       <FaArrowRight className="text-sm transition-transform duration-300 group-hover/btn:translate-x-1" />
-                    </div>
+                    </span>
+                  </a>
+
+                  {/* Live Project Button */}
+                  <a
+                    href={project.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group/btn relative inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r ${project.gradient} text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden`}
+                  >
+                    {/* Background overlay */}
+                    <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500"></div>
+
+                    {/* Content */}
+                    <span className="relative flex items-center justify-center gap-2 z-10">
+                      <FaRocket className="text-lg" />
+                      Live Project
+                      <FaArrowRight className="text-sm transition-transform duration-300 group-hover/btn:translate-x-1" />
+                    </span>
                   </a>
                 </div>
               </div>
