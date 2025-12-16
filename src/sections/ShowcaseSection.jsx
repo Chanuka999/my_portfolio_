@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useState } from "react";
+import ThreeDMeshBackground from "../components/ThreeDMeshBackground";
 import {
   FaGithub,
   FaFlask,
@@ -215,51 +216,6 @@ const ShowcaseSection = () => {
     );
   }, []);
   return (
-    // <section id="work" ref={sectionRef} className="app-showcase">
-    //   <div className="w-full">
-    //     <div className="showcaselayout">
-    //       <div className="first-project-wrapper" ref={project1Ref}>
-    //         <div className="image-wrapper">
-    //           <img src="/images/carApplication.png" alt="Car" />
-    //         </div>
-    //         <div className="text-content">
-    //           <h2>
-    //             A web app to buy and sell cars with secure login, car listings,
-    //             search filters, and AI chat support
-    //           </h2>
-    //           <p className="text-white-50 md:text-xl">
-    //             Am app built with nextjs, ThailwindCss and Shadcn UI,Appwrite
-    //             fro a fast,user-friendly experience.
-    //           </p>
-    //         </div>
-    //       </div>
-    //       <div className="project-list-wrapper overflow-hidden">
-    //         <div className="project" ref={project2Ref}>
-    //           <div className="image-wrapper bg-[#ffefdb]">
-    //             <img src="/images/whatsapp.png" alt="whatsapp" />
-    //           </div>
-    //           <h2>Whatsapp Chatbot AI Assistence</h2>
-    //         </div>
-    //         <div className="project" ref={project3Ref}>
-    //           <div className="image-wrapper bg-[#ffe7eb]">
-    //             <img src="/images/student.png" alt="whatsapp" />
-    //           </div>
-    //           <h2>Student Management System</h2>
-    //         </div>
-    //         <div className="project" ref={project4Ref}>
-    //           <div className="image-wrapper bg-[#ffe7eb]">
-    //             <img src="/images/tour.png" alt="tour" />
-    //           </div>
-    //           <h2>
-    //             <a href="https://github.com/Chanuka999/Tours_and_Travels_Booking_Webiste.git">
-    //               Tour and Travel Management System
-    //             </a>
-    //           </h2>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </section>
     <section
       id="work"
       ref={sectionRef}
@@ -270,7 +226,7 @@ const ShowcaseSection = () => {
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-green-400/10 to-blue-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
-
+      <ThreeDMeshBackground />
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Enhanced Section Header */}
         <div className="text-center mb-16">
