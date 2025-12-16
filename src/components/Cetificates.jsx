@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ThreeDMeshBackground from "../components/ThreeDMeshBackground";
 import {
   FaPython,
   FaJava,
@@ -150,6 +151,7 @@ export default function LicensesCertifications() {
       className="py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-br from-slate-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-slate-900 relative overflow-hidden"
       id="cetificates"
     >
+      <ThreeDMeshBackground />
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-blue-400/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
