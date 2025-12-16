@@ -99,7 +99,7 @@ const Contact = () => {
     {
       image: "/images/contact/phone.png",
       title: "Phone",
-      value: "+94 77 2840767",
+      value: "+94 77 2849767",
       link: "tel:+94772849767",
       color: "from-green-500 to-emerald-500",
     },
