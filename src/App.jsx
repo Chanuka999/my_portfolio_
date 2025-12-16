@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import LogoSection from "./sections/LogoSection";
 import FeatureCards from "./sections/FeatureCards";
 import ExperienceSection from "./sections/ExperienceSection";
-import Education from "./components/Education";
+
 import Cetificates from "./components/Cetificates";
 import Skills from "./components/Skills";
 import Information from "./components/Information";
@@ -17,9 +17,9 @@ const App = () => {
       <Navbar />
       <Hero />
       <Information />
-      <Education />
-      <ShowcaseSection />
       <Skills />
+      <ShowcaseSection />
+
       <Cetificates />
       <LogoSection />
 
