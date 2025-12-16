@@ -217,7 +217,7 @@ const ShowcaseSection = () => {
   }, []);
   return (
     <section
-      id="work"
+      id="projects"
       ref={sectionRef}
       className="py-20 px-6 bg-gradient-to-br relative overflow-hidden from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
     >
