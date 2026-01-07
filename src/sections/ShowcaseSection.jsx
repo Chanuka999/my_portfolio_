@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { FaRocket } from "react-icons/fa";
+import { FaFilm, FaRocket } from "react-icons/fa";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -33,6 +33,7 @@ const project7 = import.meta.env.BASE_URL + "images/chat1.png";
 const project8 = import.meta.env.BASE_URL + "images/food.png";
 const project9 = import.meta.env.BASE_URL + "images/ecocart.png";
 const project10 = import.meta.env.BASE_URL + "images/foodHop.png";
+const project11 = import.meta.env.BASE_URL + "images/movieTicket.png";
 
 // Export the project image paths if other modules need them
 // Note: These are intentionally not exported to keep this file a pure component
@@ -66,6 +67,19 @@ const projects = [
     liveLink: "https://food-hop.vercel.app/",
     category: "food ordering",
     gradient: "from-blue-500 to-cyan-600",
+  },
+  {
+    title: "MovieDeck",
+    icon: <FaFilm className="inline mr-2 text-red-500" />,
+    desc: "A full-stack movie ticket booking and cinema management platform.",
+    longDesc:
+      "MovieDeck is a full-stack movie ticket booking web application that allows users to browse movies, view showtimes, select seats, and complete secure online payments. The platform integrates real-time movie data from TMDB, secure authentication with Clerk, Stripe-powered payments, and automated email notifications. It also includes an admin dashboard for managing shows, bookings, and revenue insights. The frontend is deployed on Vercel for fast and scalable performance.",
+    tech: "React, Vite, Tailwind CSS, Node.js, Express.js, MongoDB, Stripe, Clerk, TMDB API",
+    image: project11,
+    link: "https://github.com/Chanuka999/movie_ticket_booking_app.git",
+    liveLink: "https://movie-ticket-booking-app-eta.vercel.app/",
+    category: "movie booking",
+    gradient: "from-red-500 to-orange-600",
   },
   {
     title: "Whatsapp AI Assestance",
