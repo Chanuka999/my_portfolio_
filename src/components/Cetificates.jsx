@@ -32,6 +32,7 @@ const cetificate5 = import.meta.env.BASE_URL + "images/react.jpg";
 const cetificate6 = import.meta.env.BASE_URL + "images/php.jpg";
 const cetificate7 = import.meta.env.BASE_URL + "images/html.jpg";
 const cetificate8 = import.meta.env.BASE_URL + "images/docker.jpg";
+const cetificate9 = import.meta.env.BASE_URL + "images/cisco.jpg";
 
 const certifications = [
   {
@@ -124,12 +125,12 @@ const certifications = [
   },
   {
     title: "",
-    issuer: "Google Digital Garage",
-    issueDate: "Sep 2021",
-    skills: ["Digital Marketing", "SEO", "SEM"],
+    issuer: "cisco",
+    issueDate: "Jul 2025",
+    skills: ["IT Essentials", "cisco", "network"],
     icon: <SiGooglechrome className="text-blue-500" />,
-
-    category: "Marketing",
+    image: cetificate9,
+    category: "IT Essentials",
     gradient: "from-blue-500 to-cyan-500",
     recent: false,
   },
