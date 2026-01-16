@@ -129,7 +129,7 @@ const projects = [
     tech: "react.js, thailwind css",
     image: project5,
     link: "https://github.com/Chanuka999/Online-Bus-Ticket-Booking-WebSite.git",
-    liveLink: "",
+    liveLink: "https://online-bus-ticket-booking-web-site-ten.vercel.app",
     category: "economic",
     gradient: "from-indigo-500 to-blue-600",
   },
@@ -220,13 +220,13 @@ const ShowcaseSection = () => {
             trigger: card,
             start: "top bottom-=100",
           },
-        }
+        },
       );
     });
     gsap.fromTo(
       sectionRef.current,
       { opacity: 0 },
-      { opacity: 1, duration: 1.5 }
+      { opacity: 1, duration: 1.5 },
     );
   }, []);
   return (
