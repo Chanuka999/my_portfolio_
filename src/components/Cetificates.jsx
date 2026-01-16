@@ -31,6 +31,7 @@ const cetificate4 = import.meta.env.BASE_URL + "images/server.jpg";
 const cetificate5 = import.meta.env.BASE_URL + "images/react.jpg";
 const cetificate6 = import.meta.env.BASE_URL + "images/php.jpg";
 const cetificate7 = import.meta.env.BASE_URL + "images/html.jpg";
+const cetificate8 = import.meta.env.BASE_URL + "images/docker.jpg";
 
 const certifications = [
   {
@@ -112,12 +113,12 @@ const certifications = [
   },
   {
     title: "",
-    issuer: "",
-    issueDate: "Dec 2021",
-    skills: ["English"],
+    issuer: "docker",
+    issueDate: "Dec 2025",
+    skills: ["docker"],
     icon: <GiGraduateCap className="text-green-700" />,
-
-    category: "Language",
+    image: cetificate8,
+    category: "programming",
     gradient: "from-green-600 to-teal-600",
     recent: false,
   },
