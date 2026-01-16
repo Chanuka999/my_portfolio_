@@ -34,6 +34,7 @@ const project8 = import.meta.env.BASE_URL + "images/food.png";
 const project9 = import.meta.env.BASE_URL + "images/ecocart.png";
 const project10 = import.meta.env.BASE_URL + "images/foodHop.png";
 const project11 = import.meta.env.BASE_URL + "images/movieTicket.png";
+const project12 = import.meta.env.BASE_URL + "images/gym.jpg";
 
 // Export the project image paths if other modules need them
 // Note: These are intentionally not exported to keep this file a pure component
@@ -146,6 +147,7 @@ const projects = [
     category: "economic",
     gradient: "from-red-500 to-orange-600",
   },
+
   {
     title: "Chat Application",
     icon: <FaComments className="inline mr-2 text-purple-500" />,
@@ -170,6 +172,19 @@ const projects = [
     liveLink: "",
     category: "economic",
     gradient: "from-purple-500 to-pink-600",
+  },
+  {
+    title: "Gim Website",
+    icon: <FaFlask className="inline mr-2 text-blue-500" />,
+    desc: "gim webSite",
+    longDesc:
+      "We are a fully equipped gym focused on strength, fitness, and healthy living. With professional trainers, modern equipment, and flexible workout plans, we help you reach your fitness goals faster and safer.",
+    tech: "react.js, thailwind css",
+    image: project12,
+    link: "https://github.com/Chanuka999/Resposive_Gim_Website.git",
+    liveLink: "https://responiblegymwebsite.netlify.app",
+    category: "gim",
+    gradient: "from-blue-500 to-orange-600",
   },
   {
     title: "eco cart",
