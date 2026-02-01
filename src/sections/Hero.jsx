@@ -77,7 +77,11 @@ const Hero = () => {
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+                    transition={{
+                      delay: 0.5,
+                      type: "spring",
+                      stiffness: 200,
+                    }}
                     className="w-32 h-36 md:w-44 md:h-48 lg:w-55 lg:h-66 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full p-2 shadow-2xl"
                   >
                     <div className="w-full h-full bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center overflow-hidden">
