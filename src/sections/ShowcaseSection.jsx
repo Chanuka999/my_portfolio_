@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { FaFilm, FaRocket } from "react-icons/fa";
+import { FaFilm, FaLaptop, FaRocket, FaTruck } from "react-icons/fa";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -35,6 +35,9 @@ const project9 = import.meta.env.BASE_URL + "images/ecocart.png";
 const project10 = import.meta.env.BASE_URL + "images/foodHop.png";
 const project11 = import.meta.env.BASE_URL + "images/movieTicket.png";
 const project12 = import.meta.env.BASE_URL + "images/gym.jpg";
+const project13 = import.meta.env.BASE_URL + "images/medicare.png";
+const project14 = import.meta.env.BASE_URL + "images/technova.png";
+const project15 = import.meta.env.BASE_URL + "images/courierFlow.png";
 
 // Export the project image paths if other modules need them
 // Note: These are intentionally not exported to keep this file a pure component
@@ -43,6 +46,32 @@ const project12 = import.meta.env.BASE_URL + "images/gym.jpg";
 // separate constants file.
 
 const projects = [
+  {
+    title: "MediFlow HMS - Hospital Management System",
+    icon: <FaStethoscope className="inline mr-2 text-green-600" />,
+    desc: "A role-based Hospital Management System built with the MERN stack",
+    longDesc:
+      "A comprehensive, role-based Hospital Management System built with the MERN stack (MongoDB, Express.js, React, Node.js). The system streamlines hospital operations by providing secure dashboards for Admins, Doctors, and Patients. Patients can register, book appointments, view medical records, and track bills. Doctors can manage appointments, update patient statuses, create prescriptions, and maintain medical records. Admins can oversee users, manage doctor accounts, monitor billing, and access overall system statistics.",
+    tech: "MongoDB, Express.js, React.js, Node.js, JWT, Mongoose, Axios, Context API, Vite",
+    image: project13,
+    link: "https://github.com/Chanuka999/medicare.git",
+    liveLink: "https://medicare-xr2r.vercel.app",
+    category: "healthcare",
+    gradient: "from-green-500 to-teal-600",
+  },
+  {
+    title: "Technova CMS - Computer Shop Management System",
+    icon: <FaLaptop className="inline mr-2 text-blue-600" />,
+    desc: "A full-stack web application for managing computer shop operations",
+    longDesc:
+      "Technova CMS is a comprehensive full-stack web application designed to manage all aspects of a computer shop. It handles **inventory management, sales tracking, customer and supplier records, and financial reporting**. The system provides an intuitive interface for admins and staff to streamline operations, improve efficiency, and maintain accurate records.",
+    tech: "MongoDB, Express.js, React.js, Node.js, JWT, Mongoose, Axios, Context API, Bootstrap",
+    image: project14,
+    link: "https://github.com/Chanuka999/technova_cms.git",
+    liveLink: "https://technova-cms-opo5.vercel.app",
+    category: "business",
+    gradient: "from-purple-500 to-indigo-600",
+  },
   {
     title: "Car Marketplace System",
     icon: <FaFlask className="inline mr-2 text-blue-500" />,
@@ -94,6 +123,19 @@ const projects = [
     liveLink: "",
     category: "Social Media",
     gradient: "from-green-500 to-emerald-600",
+  },
+  {
+    title: "Courier Management System",
+    icon: <FaTruck className="inline mr-2 text-orange-600" />,
+    desc: "A MERN stack web application for managing courier and parcel delivery operations",
+    longDesc:
+      "Courier Management System is a full-stack web application built with the MERN stack (MongoDB, Express.js, React.js, Node.js). It helps manage courier operations by allowing users to create shipments, track parcels, manage customers, and update delivery status through a centralized dashboard. The system improves delivery management efficiency and provides real-time parcel tracking and operational control.",
+    tech: "MongoDB, Express.js, React.js, Node.js, JWT, Mongoose, Axios, Context API",
+    image: project15,
+    link: "https://github.com/Chanuka999/courierflow.git",
+    liveLink: "https://courierflow-hj31-lac.vercel.app/",
+    category: "logistics",
+    gradient: "from-orange-500 to-red-600",
   },
   {
     title: "Tour and Travel Booking Website",
