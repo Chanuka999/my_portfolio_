@@ -27,6 +27,24 @@ const App = () => {
         />
         <meta name="author" content="Chanuka Randitha" />
         <meta name="robots" content="index, follow" />
+
+        <meta
+          property="og:title"
+          content="Chanuka Randitha | Full Stack Developer"
+        />
+        <meta
+          property="og:description"
+          content="Portfolio of Chanuka Randitha, showcasing full-stack projects and skills."
+        />
+        <meta
+          property="og:image"
+          content="https://my-portfolio-jc4a.vercel.app/og-image.jpg"
+        />
+        <meta
+          property="og:url"
+          content="https://my-portfolio-jc4a.vercel.app/"
+        />
+        <meta property="og:type" content="website" />
       </Helmet>
       <Navbar />
       <Hero />
