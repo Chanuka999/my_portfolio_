@@ -10,6 +10,7 @@ import Cetificates from "./components/Cetificates";
 import Skills from "./components/Skills";
 import Information from "./components/Information";
 import Contact from "./sections/Contact";
+import WorkExperience from "./components/work_experience";
 
 const App = () => {
   return (
@@ -50,6 +51,7 @@ const App = () => {
       <Hero />
       <Information />
       <Skills />
+      <WorkExperience/>
       <ShowcaseSection />
 
       <Cetificates />
