@@ -31,7 +31,6 @@ import {
   FiCode,
 } from "react-icons/fi";
 
-
 // ======================================================
 // TECHNOLOGIES
 // ======================================================
@@ -102,7 +101,6 @@ const technologies = [
   },
 ];
 
-
 // ======================================================
 // SOCIAL LINKS
 // ======================================================
@@ -129,7 +127,6 @@ const socials = [
     label: "Facebook",
   },
 ];
-
 
 // ======================================================
 // NAVIGATION
@@ -161,7 +158,6 @@ const navigation = [
     label: "Contact",
   },
 ];
-
 
 // ======================================================
 // TECH CARD
@@ -259,7 +255,6 @@ const TechCard = ({ technology }) => {
   );
 };
 
-
 // ======================================================
 // ANIMATED BACKGROUND
 // ======================================================
@@ -330,7 +325,6 @@ const AnimatedBackground = () => {
     </div>
   );
 };
-
 
 // ======================================================
 // NETWORK LINES
@@ -431,7 +425,6 @@ const NetworkLines = () => {
   );
 };
 
-
 // ======================================================
 // SOCIAL LINKS
 // ======================================================
@@ -497,10 +490,6 @@ const SocialLinks = () => {
   );
 };
 
-
-
-
-
 // ======================================================
 // MAIN COMPONENT
 // ======================================================
@@ -538,7 +527,8 @@ const IntroScreen = ({ onEnter }) => {
           }}
           className="
             relative
-            min-h-screen
+            h-[100dvh]
+            min-h-0
             w-full
             overflow-hidden
             bg-[#0c055a]
@@ -598,7 +588,6 @@ const IntroScreen = ({ onEnter }) => {
             />
           </div>
 
-
           {/* ================================================= */}
           {/* ANIMATED BACKGROUND                                */}
           {/* ================================================= */}
@@ -606,7 +595,6 @@ const IntroScreen = ({ onEnter }) => {
           <AnimatedBackground />
 
           <NetworkLines />
-
 
           {/* ================================================= */}
           {/* LOGO                                                */}
@@ -673,14 +661,11 @@ const IntroScreen = ({ onEnter }) => {
             </div>
           </motion.div>
 
-
           {/* ================================================= */}
           {/* SOCIAL ICONS                                        */}
           {/* ================================================= */}
 
           <SocialLinks />
-
-
 
           {/* ================================================= */}
           {/* TECHNOLOGY CARDS                                    */}
@@ -703,7 +688,6 @@ const IntroScreen = ({ onEnter }) => {
             ))}
           </div>
 
-
           {/* ================================================= */}
           {/* MAIN CONTENT                                       */}
           {/* ================================================= */}
@@ -714,10 +698,11 @@ const IntroScreen = ({ onEnter }) => {
               z-30
               mx-auto
               flex
-              h-screen
+              h-full
+              min-h-0
               items-center
+              overflow-hidden
               px-6
-              pb-10
               pt-28
               md:px-16
               lg:pt-10
@@ -727,6 +712,8 @@ const IntroScreen = ({ onEnter }) => {
             <div
               className="
                 grid
+                h-full
+                min-h-0
                 w-full
                 grid-cols-1
                 items-center
@@ -778,7 +765,6 @@ const IntroScreen = ({ onEnter }) => {
                   Building Digital Experiences
                 </motion.div>
 
-
                 {/* Main Heading */}
 
                 <motion.h1
@@ -807,9 +793,7 @@ const IntroScreen = ({ onEnter }) => {
                     xl:text-[88px]
                   "
                 >
-                
                 </motion.h1>
-
 
                 {/* Gradient Line */}
 
@@ -833,7 +817,6 @@ const IntroScreen = ({ onEnter }) => {
                     to-fuchsia-500
                   "
                 />
-
 
                 {/* Description */}
 
@@ -860,9 +843,8 @@ const IntroScreen = ({ onEnter }) => {
                     md:text-lg
                   "
                 >
-                 developed Crafting seamless web and mobile applications
+                  developed Crafting seamless web and mobile applications
                 </motion.p>
-
 
                 {/* CTA */}
 
@@ -965,7 +947,6 @@ const IntroScreen = ({ onEnter }) => {
 
                 </motion.button>
 
-
                 {/* Interactive text */}
 
                 <motion.div
@@ -998,7 +979,6 @@ const IntroScreen = ({ onEnter }) => {
 
               </div>
 
-
               {/* ================================================= */}
               {/* RIGHT PORTRAIT                                     */}
               {/* ================================================= */}
@@ -1007,10 +987,12 @@ const IntroScreen = ({ onEnter }) => {
                 className="
                   relative
                   flex
-                  min-h-[500px]
+                  h-full
+                  min-h-0
                   items-end
                   justify-center
-                  lg:min-h-[700px]
+                  overflow-visible
+                  lg:min-h-0
                 "
               >
 
@@ -1037,7 +1019,6 @@ const IntroScreen = ({ onEnter }) => {
                     blur-[100px]
                   "
                 />
-
 
                 {/* Orbit */}
 
@@ -1079,7 +1060,6 @@ const IntroScreen = ({ onEnter }) => {
                   />
                 </motion.div>
 
-
                 {/* ================================================= */}
                 {/* PORTRAIT                                           */}
                 {/* ================================================= */}
@@ -1102,10 +1082,15 @@ const IntroScreen = ({ onEnter }) => {
                   className="
                     relative
                     z-20
-                    h-[520px]
+                    flex
+                    h-[calc(100dvh-120px)]
+                    max-h-[720px]
                     w-full
                     max-w-[560px]
-                    lg:h-[720px]
+                    items-end
+                    justify-center
+                    lg:h-[calc(100dvh-20px)]
+                    lg:max-h-[720px]
                   "
                 >
 
@@ -1125,7 +1110,6 @@ const IntroScreen = ({ onEnter }) => {
                       blur-2xl
                     "
                   />
-
 
                   {/* YOUR PORTRAIT */}
 
@@ -1153,42 +1137,38 @@ const IntroScreen = ({ onEnter }) => {
                     "
                   />
 
-
                   {/* Code Badge */}
 
-                  <motion.div
+                 <motion.div
                     initial={{
                       opacity: 0,
-                      scale: 0,
+                      scale: 0.8,
+                      x: 80,
                     }}
                     animate={{
                       opacity: 1,
                       scale: 1,
+                      x: 0,
                     }}
                     transition={{
-                      delay: 1.7,
-                      type: "spring",
+                      delay: 0.5,
+                      duration: 1.2,
                     }}
                     className="
-                      absolute
-                      bottom-[18%]
-                      left-[12%]
-                      z-40
-                      hidden
-                      rounded-xl
-                      border
-                      border-white/10
-                      bg-black/60
-                      p-3
-                      font-mono
-                      text-xs
-                      text-cyan-300
-                      backdrop-blur-xl
-                      lg:block
+                      relative
+                      z-20
+                      flex
+                      h-[100dvh]
+                      max-h-[100dvh]
+                      w-full
+                      max-w-[560px]
+                      items-end
+                      justify-center
                     "
                   >
                     <div className="flex items-center gap-2">
                       <FiCode />
+
                       <span>
                         build.digital()
                       </span>
@@ -1202,70 +1182,6 @@ const IntroScreen = ({ onEnter }) => {
             </div>
 
           </section>
-
-
-          {/* ================================================= */}
-          {/* MOBILE NAV                                         */}
-          {/* ================================================= */}
-
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 40,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              delay: 1.5,
-            }}
-            className="
-              fixed
-              bottom-4
-              left-1/2
-              z-50
-              flex
-              -translate-x-1/2
-              items-center
-              gap-1
-              rounded-full
-              border
-              border-white/10
-              bg-black/60
-              p-2
-              backdrop-blur-xl
-              md:hidden
-            "
-          >
-            {navigation.slice(0, 5).map((item, index) => {
-              const Icon = item.icon;
-
-              return (
-                <button
-                  key={item.label}
-                  type="button"
-                  onClick={() => setActiveSection(index)}
-                  className={`
-                    flex
-                    h-10
-                    w-10
-                    items-center
-                    justify-center
-                    rounded-full
-                    transition
-                    ${
-                      activeSection === index
-                        ? "bg-red-500 text-white"
-                        : "text-white/50"
-                    }
-                  `}
-                >
-                  <Icon />
-                </button>
-              );
-            })}
-          </motion.div>
 
 
           {/* ================================================= */}
