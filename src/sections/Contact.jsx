@@ -27,9 +27,9 @@ const Contact = () => {
 
   // Replace these with your actual EmailJS credentials
   const EMAILJS_CONFIG = {
-    SERVICE_ID: "",
-    TEMPLATE_ID: "",
-    PUBLIC_KEY: "",
+    SERVICE_ID: "service_rw6fo5i",
+    TEMPLATE_ID: "template_kxvy4iu",
+    PUBLIC_KEY: "ATsRWQoEmKAx4Kk2n",
   };
 
   const handleChange = (e) => {
