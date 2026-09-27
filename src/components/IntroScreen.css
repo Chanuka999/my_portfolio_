@@ -1,0 +1,621 @@
+/* =========================================
+   MAIN LAYOUT & FUTURISTIC SERVER ROOM BG
+========================================= */
+
+.journey {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #020712;
+  color: #eafaff;
+  font-family: "Inter", "Mona Sans", system-ui, -apple-system, sans-serif;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.journey-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image:
+    radial-gradient(
+      circle at center,
+      rgba(2, 7, 18, 0.1) 0%,
+      rgba(2, 7, 18, 0.6) 100%
+    ),
+    url("/images/portfolio-corridor.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transform: scale(1.03) translate3d(calc(var(--mouse-x, 0) * -12px), calc(var(--mouse-y, 0) * -8px), 0);
+  filter: brightness(0.95) contrast(1.12) saturate(1.15);
+  transition: transform 0.2s ease-out, filter 1.2s ease;
+}
+
+.journey-ready .journey-bg {
+  filter: brightness(1.08) contrast(1.18) saturate(1.2);
+}
+
+.journey-opening .journey-bg {
+  transform: scale(1.4);
+  filter: brightness(1.4) contrast(1.2) saturate(1.2) blur(3px);
+}
+
+.journey-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: transparent;
+  pointer-events: none;
+}
+
+.journey-canvas canvas {
+  background: transparent !important;
+}
+
+/* =========================================
+   NEON BLUE & GOLD ENERGY PATHS (SVG OVERLAY)
+========================================= */
+
+.energy-paths-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.energy-path {
+  stroke-dasharray: 20 10;
+  animation: strokeFlow 3s linear infinite;
+}
+
+.energy-path-2, .energy-path-4 {
+  animation-duration: 2s;
+}
+
+@keyframes strokeFlow {
+  from {
+    stroke-dashoffset: 300;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.journey-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 35%, rgba(2, 6, 14, 0.65) 100%),
+    linear-gradient(180deg, rgba(2, 6, 14, 0.5) 0%, transparent 20%, transparent 80%, rgba(2, 6, 14, 0.7) 100%);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.journey-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px clamp(24px, 5vw, 70px);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #a0aec0;
+  z-index: 10;
+}
+
+.journey-header > span:first-child {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+}
+
+.journey-dot {
+  color: #00f0ff;
+}
+
+.journey-header > span:last-child {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  color: #cbd5e1;
+}
+
+/* =========================================
+   CENTER PORTAL HERO SECTION
+========================================= */
+
+.journey-center-hero {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 8;
+  width: min(90%, 480px);
+}
+
+.journey-center-hero.hero-hidden {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.75);
+  pointer-events: none;
+  filter: blur(10px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journey-center-hero.hero-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) translate3d(calc(var(--mouse-x, 0) * 15px), calc(var(--mouse-y, 0) * 10px), 0);
+  pointer-events: auto;
+  filter: blur(0px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s ease-out, filter 1s ease;
+  animation: heroEntranceGlow 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journey-opening .journey-center-hero {
+  opacity: 0 !important;
+  transform: translate(-50%, -65%) scale(1.15) !important;
+  pointer-events: none !important;
+  transition: opacity 0.8s ease, transform 0.8s ease !important;
+}
+
+.hero-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  line-height: 0.95;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 35px rgba(255, 255, 255, 0.45),
+    0 0 15px rgba(0, 240, 255, 0.3),
+    0 4px 20px rgba(0, 0, 0, 0.9);
+}
+
+.hero-name .name-line {
+  font-size: clamp(28px, 4vw, 44px);
+}
+
+.hero-role {
+  margin: 12px 0 0;
+  font-size: clamp(10px, 1.1vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: #94a3b8;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+.hero-accent-bar {
+  width: 54px;
+  height: 3px;
+  border-radius: 3px;
+  margin: 14px 0 24px;
+  background: linear-gradient(90deg, #00f0ff, #ec4899, #f59e0b);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.8), 0 0 8px rgba(0, 240, 255, 0.8);
+}
+
+.hero-enter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 36px;
+  border-radius: 50px;
+  background: rgba(10, 16, 30, 0.8);
+  border: 1.5px solid #f59e0b;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 0 25px rgba(245, 158, 11, 0.4),
+    inset 0 0 16px rgba(245, 158, 11, 0.2);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-enter-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: rgba(245, 158, 11, 0.22);
+  border-color: #fbbf24;
+  box-shadow:
+    0 0 40px rgba(245, 158, 11, 0.75),
+    inset 0 0 25px rgba(245, 158, 11, 0.4);
+}
+
+.hero-enter-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.hero-enter-btn .btn-arrow {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.hero-enter-btn:hover .btn-arrow {
+  transform: translateX(5px);
+}
+
+@keyframes heroEntranceGlow {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.75);
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+/* =========================================
+   3D TECH CARDS SPAWNING FROM CENTER GOLDEN DOOR
+========================================= */
+
+.journey-cards-col {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  z-index: 6;
+  perspective: 1200px;
+  transition: opacity 0.8s ease, transform 0.8s ease, left 0.8s ease, right 0.8s ease;
+}
+
+/* During flying phase: Cards spawn 100% DEAD CENTER right at the Golden Door */
+.journey-flying .journey-cards-col {
+  left: 50% !important;
+  right: auto !important;
+  transform: translate(-50%, -50%) !important;
+  pointer-events: none;
+}
+
+/* During ready phase: Cards dock onto the left and right corridor walls */
+.journey-ready .journey-cards-left {
+  left: clamp(20px, 5vw, 80px);
+  right: auto;
+  transform: translateY(-50%);
+}
+
+.journey-ready .journey-cards-right {
+  right: clamp(20px, 5vw, 80px);
+  left: auto;
+  transform: translateY(-50%);
+}
+
+.journey-opening .journey-cards-col {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tech-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: clamp(200px, 16vw, 240px);
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: rgba(8, 18, 34, 0.72);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-color, rgba(0, 240, 255, 0.5));
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    0 0 22px var(--glow-color, rgba(0, 240, 255, 0.3)),
+    inset 0 0 16px var(--glow-color, rgba(0, 240, 255, 0.15));
+  transition: box-shadow 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+}
+
+/* Flying phase animations: Emerge from center door, fan out left & right, zoom past user */
+.journey-flying .tech-card-left {
+  animation: flyPastUserLeft 2.3s cubic-bezier(0.12, 0.9, 0.2, 1) forwards;
+  animation-delay: var(--card-delay, 0s);
+}
+
+.journey-flying .tech-card-right {
+  animation: flyPastUserRight 2.3s cubic-bezier(0.12, 0.9, 0.2, 1) forwards;
+  animation-delay: var(--card-delay, 0s);
+}
+
+/* Arrival phase animations: Dock cleanly onto the side walls around golden door */
+.journey-ready .tech-card-left {
+  animation:
+    fadeInDockLeft 0.8s ease forwards,
+    floatHoverLeft 4.8s ease-in-out infinite 0.8s;
+}
+
+.journey-ready .tech-card-right {
+  animation:
+    fadeInDockRight 0.8s ease forwards,
+    floatHoverRight 4.8s ease-in-out infinite 0.8s;
+}
+
+/* 
+ * 3D Motion Keyframe: Cards emerge from dead-center Golden Door seam (translate3d 0, 0, -1200px),
+ * fan out to left/right, zoom forward past the screen/camera (+1000px Z), scaling up big (scale 3.5)
+ * and flying right past the user into the space behind the user's back!
+ */
+
+@keyframes flyPastUserLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, -1200px) scale(0.01) rotateY(50deg);
+    filter: blur(20px) brightness(4);
+    box-shadow: 0 0 80px var(--glow-color, rgba(0, 240, 255, 1));
+  }
+  20% {
+    opacity: 0.95;
+    filter: blur(2px) brightness(1.8);
+  }
+  55% {
+    opacity: 1;
+    transform: translate3d(-350px, -20px, -150px) scale(1.1) rotateY(25deg);
+    filter: blur(0px) brightness(1.2);
+  }
+  80% {
+    opacity: 0.95;
+    transform: translate3d(-650px, -60px, 350px) scale(2.2) rotateY(12deg);
+    filter: blur(4px) brightness(1.6);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-1000px, -100px, 1000px) scale(3.5) rotateY(5deg);
+    filter: blur(18px) brightness(2.5);
+  }
+}
+
+@keyframes flyPastUserRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, -1200px) scale(0.01) rotateY(-50deg);
+    filter: blur(20px) brightness(4);
+    box-shadow: 0 0 80px var(--glow-color, rgba(245, 158, 11, 1));
+  }
+  20% {
+    opacity: 0.95;
+    filter: blur(2px) brightness(1.8);
+  }
+  55% {
+    opacity: 1;
+    transform: translate3d(350px, -20px, -150px) scale(1.1) rotateY(-25deg);
+    filter: blur(0px) brightness(1.2);
+  }
+  80% {
+    opacity: 0.95;
+    transform: translate3d(650px, -60px, 350px) scale(2.2) rotateY(-12deg);
+    filter: blur(4px) brightness(1.6);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(1000px, -100px, 1000px) scale(3.5) rotateY(-5deg);
+    filter: blur(18px) brightness(2.5);
+  }
+}
+
+@keyframes fadeInDockLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-40px, 20px, -100px) scale(0.85) rotateY(8deg);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotateY(8deg) rotateX(2deg);
+    filter: blur(0px);
+  }
+}
+
+@keyframes fadeInDockRight {
+  from {
+    opacity: 0;
+    transform: translate3d(40px, 20px, -100px) scale(0.85) rotateY(-8deg);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotateY(-8deg) rotateX(2deg);
+    filter: blur(0px);
+  }
+}
+
+/* Hover and floating animations matching mouse parallax */
+@keyframes floatHoverLeft {
+  0%, 100% {
+    transform: translate3d(
+      calc(var(--mouse-x, 0) * 20px),
+      calc(var(--mouse-y, 0) * 12px),
+      0
+    ) rotateY(calc(8deg + var(--mouse-x, 0) * 6deg)) rotateX(calc(2deg - var(--mouse-y, 0) * 6deg));
+  }
+  50% {
+    transform: translate3d(
+      calc(var(--mouse-x, 0) * 20px),
+      calc(-8px + var(--mouse-y, 0) * 12px),
+      25px
+    ) rotateY(calc(10deg + var(--mouse-x, 0) * 6deg)) rotateX(calc(4deg - var(--mouse-y, 0) * 6deg));
+  }
+}
+
+@keyframes floatHoverRight {
+  0%, 100% {
+    transform: translate3d(
+      calc(var(--mouse-x, 0) * 20px),
+      calc(var(--mouse-y, 0) * 12px),
+      0
+    ) rotateY(calc(-8deg + var(--mouse-x, 0) * 6deg)) rotateX(calc(2deg - var(--mouse-y, 0) * 6deg));
+  }
+  50% {
+    transform: translate3d(
+      calc(var(--mouse-x, 0) * 20px),
+      calc(-8px + var(--mouse-y, 0) * 12px),
+      25px
+    ) rotateY(calc(-10deg + var(--mouse-x, 0) * 6deg)) rotateX(calc(4deg - var(--mouse-y, 0) * 6deg));
+  }
+}
+
+.tech-card:hover {
+  transform: scale(1.08) translate3d(0, -4px, 40px) rotateY(0deg) rotateX(0deg) !important;
+  background: rgba(14, 30, 58, 0.94);
+  z-index: 10;
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.7),
+    0 0 36px var(--glow-color, rgba(0, 240, 255, 0.7)),
+    inset 0 0 24px var(--glow-color, rgba(0, 240, 255, 0.35));
+}
+
+.tech-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 10px;
+  background: var(--badge-bg, rgba(255, 255, 255, 0.08));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  box-shadow: 0 0 12px var(--glow-color, transparent);
+}
+
+.tech-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tech-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.tech-role {
+  font-size: 11px;
+  font-weight: 500;
+  color: #94a3b8;
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================
+   SKIP INTRO BUTTON
+========================================= */
+
+.journey-skip-btn {
+  position: absolute;
+  bottom: 30px;
+  right: clamp(24px, 5vw, 70px);
+  padding: 8px 18px;
+  border-radius: 30px;
+  background: rgba(10, 16, 30, 0.6);
+  border: 1.5px solid rgba(0, 240, 255, 0.4);
+  color: #eafaff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  z-index: 12;
+  transition: all 0.25s ease;
+}
+
+.journey-skip-btn:hover {
+  color: #ffffff;
+  border-color: #00f0ff;
+  background: rgba(10, 16, 30, 0.85);
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.5);
+}
+
+/* =========================================
+   RESPONSIVE MEDIA QUERIES
+========================================= */
+
+@media (max-width: 1024px) {
+  .journey-cards-col {
+    gap: 16px;
+  }
+  .tech-card {
+    width: 180px;
+    padding: 10px 14px;
+    gap: 10px;
+  }
+  .tech-name {
+    font-size: 13px;
+  }
+  .tech-role {
+    font-size: 10px;
+  }
+  .tech-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+  }
+  .tech-icon-wrapper svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .journey {
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+  }
+  .journey-center-hero {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none !important;
+    margin-top: 100px;
+    margin-bottom: 30px;
+    animation: none;
+  }
+  .journey-opening .journey-center-hero {
+    transform: scale(1.15) !important;
+  }
+  .journey-cards-col {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 0 20px 40px;
+    gap: 12px;
+  }
+  .tech-card {
+    width: calc(50% - 12px);
+    max-width: 200px;
+    animation: none !important;
+    transform: none !important;
+  }
+}

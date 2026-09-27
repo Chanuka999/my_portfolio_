@@ -1,1224 +1,402 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Stars } from "@react-three/drei";
+import * as THREE from "three";
+import "./IntroScreen.css";
 
-import {
-  FaGithub,
-  FaLinkedinIn,
-  FaInstagram,
-  FaFacebookF,
-  FaReact,
-  FaAngular,
-  FaNodeJs,
-  FaJava,
-  FaAws,
-} from "react-icons/fa";
+// SVG Tech Icons
+const AngularIcon = () => (
+  <svg viewBox="0 0 256 272" width="28" height="28">
+    <path fill="#DD0031" d="M128 0L0 45.6l19.5 169.5L128 272l108.5-56.9L256 45.6z" />
+    <path fill="#C3002F" d="M128 0v272l108.5-56.9L256 45.6z" />
+    <path fill="#FFFFFF" d="M128 35.5L59.8 188.7h29.9l13.7-34.3h49.2l13.7 34.3h29.9zM128 78l17.7 44.3h-35.4z" />
+  </svg>
+);
 
-import {
-  SiJavascript,
-  SiLaravel,
-  SiPhp,
-  SiMysql,
-} from "react-icons/si";
+const ReactIcon = () => (
+  <svg viewBox="-11.5 -10.23174 23 20.46348" width="28" height="28">
+    <circle cx="0" cy="0" r="2.05" fill="#61dafb" />
+    <g stroke="#61dafb" strokeWidth="1" fill="none">
+      <ellipse rx="11" ry="4.2" />
+      <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+      <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+    </g>
+  </svg>
+);
 
-import {
-  FiArrowRight,
-  FiHome,
-  FiUser,
-  FiGrid,
-  FiLayers,
-  FiMessageCircle,
-  FiMail,
-  FiCode,
-} from "react-icons/fi";
+const LaravelIcon = () => (
+  <svg viewBox="0 0 50 50" width="28" height="28">
+    <path fill="#FF2D20" d="M38.8 14.8L26.5 7.7c-.9-.5-2.1-.5-3 0L11.2 14.8c-.9.5-1.5 1.5-1.5 2.6v14.3c0 1 .6 2 1.5 2.6l12.3 7.1c.5.3 1 .4 1.5.4s1-.1 1.5-.4l12.3-7.1c.9-.5 1.5-1.5 1.5-2.6V17.4c0-1.1-.6-2.1-1.5-2.6zM25 11.2l9.8 5.6-4.1 2.4-9.8-5.6 4.1-2.4zm-11.8 6.8l9.8-5.6v4.7l-9.8 5.6v-4.7zm0 9.4l9.8 5.6v4.7l-9.8-5.6v-4.7zm23.6 0l-9.8 5.6v-4.7l9.8-5.6v4.7zm0-9.4l-4.1 2.4-5.7-3.3 4.1-2.4 5.7 3.3z" />
+  </svg>
+);
 
-// ======================================================
-// TECHNOLOGIES
-// ======================================================
+const MySQLIcon = () => (
+  <svg viewBox="0 0 128 128" width="28" height="28">
+    <path fill="#00758F" d="M63.5 12C35.1 12 12 35.1 12 63.5S35.1 115 63.5 115 115 91.9 115 63.5 91.9 12 63.5 12zm23.4 75.6c-4.4 2.8-10.8 4.2-18.7 4.2-10.9 0-19.1-3.2-24.6-9.6-5.5-6.4-8.3-15.5-8.3-27.3 0-11.8 2.9-20.9 8.6-27.2 5.7-6.3 14-9.4 24.8-9.4 7.6 0 13.7 1.3 18.2 4l-4.2 10.6c-3.6-2.1-8.5-3.1-14.6-3.1-7.2 0-12.7 2.1-16.3 6.3-3.6 4.2-5.4 10.5-5.4 18.8 0 8.3 1.8 14.6 5.4 18.8 3.6 4.2 9.1 6.3 16.5 6.3 6.2 0 11.4-1.2 15.6-3.6l3 11.2z" />
+    <path fill="#F29111" d="M84.2 56.7c0 3.2-2.6 5.8-5.8 5.8s-5.8-2.6-5.8-5.8 2.6-5.8 5.8-5.8 5.8 2.6 5.8 5.8z" />
+  </svg>
+);
 
-const technologies = [
-  {
-    name: "React",
-    icon: FaReact,
-    color: "#61dafb",
-    className: "left-[6%] top-[12%]",
-    delay: 0.3,
-  },
-  {
-    name: "Java",
-    icon: FaJava,
-    color: "#f89820",
-    className: "left-[27%] top-[1%]",
-    delay: 0.5,
-  },
-  {
-    name: "JavaScript",
-    icon: SiJavascript,
-    color: "#f7df1e",
-    className: "right-[31%] top-[3%]",
-    delay: 0.7,
-  },
-  {
-    name: "Node.js",
-    icon: FaNodeJs,
-    color: "#68a063",
-    className: "right-[6%] top-[22%]",
-    delay: 0.9,
-  },
+const JSIcon = () => (
+  <svg viewBox="0 0 128 128" width="28" height="28">
+    <rect width="128" height="128" rx="20" fill="#F7DF1E" />
+    <path fill="#000000" d="M67.312 103.939c4.271 2.396 9.427 4.115 15.052 4.115 8.75 0 13.906-4.271 13.906-11.25 0-6.875-4.271-9.948-11.771-13.229l-4.115-1.823c-11.042-4.792-16.354-10.469-16.354-20.938 0-12.552 9.948-21.719 26.615-21.719 7.083 0 12.396 1.458 16.354 3.542l-4.271 10.833c-3.125-1.615-7.552-2.76-12.083-2.76-7.865 0-12.188 3.854-12.188 9.323 0 6.042 3.854 8.75 11.25 11.979l4.115 1.823c12.24 5.312 17.031 11.25 17.031 21.875 0 13.75-10.781 22.812-28.594 22.812-7.552 0-14.479-1.927-18.958-4.583l4.017-10.988zm-39.687-.417c3.125 1.771 7.292 3.125 11.615 3.125 6.354 0 9.74-2.865 9.74-8.854V40.292h14.427V98.26c0 13.906-8.229 20.312-23.75 20.312-7.188 0-13.073-1.615-16.146-3.125l4.114-11.925z" />
+  </svg>
+);
+
+const NodeIcon = () => (
+  <svg viewBox="0 0 128 128" width="28" height="28">
+    <path fill="#539E43" d="M64 12L16 39.7v55.4L64 122.8l48-27.7V39.7L64 12zm29.8 70.8c0 4.1-2.2 7.9-5.7 9.9L68.7 104c-2.9 1.7-6.5 1.7-9.4 0L39.9 92.7c-3.6-2.1-5.7-5.8-5.7-9.9V60.2c0-4.1 2.2-7.9 5.7-9.9L59.3 39c2.9-1.7 6.5-1.7 9.4 0l19.4 11.3c3.6 2.1 5.7 5.8 5.7 9.9v22.6z" />
+    <path fill="#FFFFFF" d="M64 50.8L46.8 60.7v19.8L64 90.4l17.2-9.9V60.7L64 50.8z" />
+  </svg>
+);
+
+const AWSIcon = () => (
+  <svg viewBox="0 0 128 128" width="28" height="28">
+    <path fill="#FF9900" d="M39.6 74.4c-4.4 0-7.8-1.2-10.2-3.6-2.4-2.4-3.6-5.8-3.6-10.2 0-4.6 1.2-8.1 3.7-10.5 2.5-2.4 5.9-3.6 10.3-3.6 2.4 0 4.6.4 6.7 1.2v-2.8c0-2.4-.6-4.2-1.7-5.3-1.1-1.1-2.8-1.7-5-1.7-2.1 0-4.4.5-6.9 1.5l-1.8-5.4c3.1-1.3 6.3-2 9.6-2 4.4 0 7.7 1.1 9.9 3.3 2.2 2.2 3.3 5.5 3.3 9.9v28.8h-6.2v-4.5c-2.1 3.3-5.2 4.9-8.1 4.9zm1.2-5.4c2.1 0 4.1-.7 6-2.1v-9.3c-1.6-.7-3.2-1-4.8-1-2.5 0-4.4.6-5.7 1.8-1.3 1.2-2 2.9-2 5.1 0 2.2.6 3.8 1.8 4.8 1.2.5 2.8.7 4.7.7zm28.3 4.8l-10.5-30.6h7.2l7.1 23 6.9-23h6.6l6.8 23 7.2-23h7.1L94.5 73.8h-6.8l-6.8-22.5-6.7 22.5h-5.1z" />
+    <path fill="#FF9900" d="M22.8 88.5c23.6 11.4 53.6 11.4 77.2 0 2.1-1 3.3 1.3 1.2 2.6-25.5 15.6-58.5 15.6-84 0-2.1-1.3-.9-3.6 1.2-2.6z" />
+  </svg>
+);
+
+const GitIcon = () => (
+  <svg viewBox="0 0 128 128" width="26" height="26">
+    <path fill="#F05032" d="M122.7 57.3L70.7 5.3c-3-3-7.9-3-10.9 0L47.5 17.6l13.8 13.8c3.2-1.1 6.9-.3 9.3 2.1 2.5 2.5 3.1 6.2 2 9.4l13.3 13.3c3.2-1.1 6.9-.3 9.4 2.1 3.3 3.3 3.3 8.6 0 11.9-3.3 3.3-8.6 3.3-11.9 0-2.6-2.6-3.3-6.4-2.1-9.7L68.8 47.7v30.4c.8.4 1.5 1 2.1 1.6 3.3 3.3 3.3 8.6 0 11.9-3.3 3.3-8.6 3.3-11.9 0-3.3-3.3-3.3-8.6 0-11.9.8-.8 1.8-1.5 2.9-1.9V47.1c-1.1-.4-2.1-1-2.9-1.9-2.6-2.6-3.3-6.4-2.1-9.7L42.9 22.2 5.3 59.8c-3 3-3 7.9 0 10.9l52 52c3 3 7.9 3 10.9 0l54.5-54.5c3-3 3-7.9 0-10.9z" />
+  </svg>
+);
+
+const technologiesLeft = [
   {
     name: "Angular",
-    icon: FaAngular,
-    color: "#dd0031",
-    className: "left-[7%] bottom-[20%]",
-    delay: 1.1,
+    role: "Frontend Development",
+    Icon: AngularIcon,
+    borderColor: "rgba(225, 29, 72, 0.7)",
+    glowColor: "rgba(225, 29, 72, 0.5)",
+    badgeBg: "rgba(225, 29, 72, 0.18)",
+    delay: 0.2,
+  },
+  {
+    name: "React",
+    role: "Modern UI",
+    Icon: ReactIcon,
+    borderColor: "rgba(97, 218, 251, 0.7)",
+    glowColor: "rgba(97, 218, 251, 0.5)",
+    badgeBg: "rgba(97, 218, 251, 0.18)",
+    delay: 1.0,
   },
   {
     name: "Laravel",
-    icon: SiLaravel,
-    color: "#ff2d20",
-    className: "left-[30%] bottom-[4%]",
-    delay: 1.3,
-  },
-  {
-    name: "AWS",
-    icon: FaAws,
-    color: "#ff9900",
-    className: "right-[7%] bottom-[19%]",
-    delay: 1.5,
-  },
-  {
-    name: "PHP",
-    icon: SiPhp,
-    color: "#777bb4",
-    className: "right-[27%] bottom-[4%]",
-    delay: 1.7,
+    role: "Backend Development",
+    Icon: LaravelIcon,
+    borderColor: "rgba(255, 45, 32, 0.7)",
+    glowColor: "rgba(255, 45, 32, 0.5)",
+    badgeBg: "rgba(255, 45, 32, 0.18)",
+    delay: 1.8,
   },
   {
     name: "MySQL",
-    icon: SiMysql,
-    color: "#4479a1",
-    className: "left-[3%] top-[47%]",
-    delay: 1.9,
+    role: "Database",
+    Icon: MySQLIcon,
+    borderColor: "rgba(0, 168, 204, 0.7)",
+    glowColor: "rgba(0, 168, 204, 0.5)",
+    badgeBg: "rgba(0, 168, 204, 0.18)",
+    delay: 2.6,
   },
 ];
 
-// ======================================================
-// SOCIAL LINKS
-// ======================================================
-
-const socials = [
+const technologiesRight = [
   {
-    icon: FaGithub,
-    href: "https://github.com/",
-    label: "GitHub",
+    name: "JavaScript",
+    role: "Dynamic Web Apps",
+    Icon: JSIcon,
+    borderColor: "rgba(247, 223, 30, 0.7)",
+    glowColor: "rgba(247, 223, 30, 0.5)",
+    badgeBg: "rgba(247, 223, 30, 0.18)",
+    delay: 0.6,
   },
   {
-    icon: FaLinkedinIn,
-    href: "https://linkedin.com/",
-    label: "LinkedIn",
+    name: "Node.js",
+    role: "Backend Services",
+    Icon: NodeIcon,
+    borderColor: "rgba(104, 160, 99, 0.7)",
+    glowColor: "rgba(104, 160, 99, 0.5)",
+    badgeBg: "rgba(104, 160, 99, 0.18)",
+    delay: 1.4,
   },
   {
-    icon: FaInstagram,
-    href: "https://instagram.com/",
-    label: "Instagram",
+    name: "AWS",
+    role: "Cloud Services",
+    Icon: AWSIcon,
+    borderColor: "rgba(255, 153, 0, 0.7)",
+    glowColor: "rgba(255, 153, 0, 0.5)",
+    badgeBg: "rgba(255, 153, 0, 0.18)",
+    delay: 2.2,
   },
   {
-    icon: FaFacebookF,
-    href: "https://facebook.com/",
-    label: "Facebook",
-  },
-];
-
-// ======================================================
-// NAVIGATION
-// ======================================================
-
-const navigation = [
-  {
-    icon: FiHome,
-    label: "Home",
-  },
-  {
-    icon: FiUser,
-    label: "About",
-  },
-  {
-    icon: FiGrid,
-    label: "Projects",
-  },
-  {
-    icon: FiLayers,
-    label: "Skills",
-  },
-  {
-    icon: FiMessageCircle,
-    label: "Experience",
-  },
-  {
-    icon: FiMail,
-    label: "Contact",
+    name: "Git",
+    role: "Version Control",
+    Icon: GitIcon,
+    borderColor: "rgba(240, 80, 50, 0.7)",
+    glowColor: "rgba(240, 80, 50, 0.5)",
+    badgeBg: "rgba(240, 80, 50, 0.18)",
+    delay: 3.0,
   },
 ];
 
-// ======================================================
-// TECH CARD
-// ======================================================
+// Glowing Energy Particle Stream past camera
+function EnergyParticles({ count = 120 }) {
+  const meshRef = useRef();
 
-const TechCard = ({ technology }) => {
-  const Icon = technology.icon;
+  const [dummy] = useState(() => new THREE.Object3D());
+  const [particles] = useState(() => {
+    const temp = [];
+    for (let i = 0; i < count; i++) {
+      temp.push({
+        x: (Math.random() - 0.5) * 24,
+        y: (Math.random() - 0.5) * 15,
+        z: Math.random() * 34 - 17,
+        speed: 0.1 + Math.random() * 0.16,
+      });
+    }
+    return temp;
+  });
+
+  useFrame(() => {
+    if (!meshRef.current) return;
+    particles.forEach((p, i) => {
+      p.z += p.speed;
+      if (p.z > 18) p.z = -17;
+
+      dummy.position.set(p.x, p.y, p.z);
+      dummy.scale.setScalar(0.045 + Math.sin(p.z * 0.4) * 0.025);
+      dummy.updateMatrix();
+      meshRef.current.setMatrixAt(i, dummy.matrix);
+    });
+    meshRef.current.instanceMatrix.needsUpdate = true;
+  });
 
   return (
-    <motion.div
-      className={`absolute z-20 ${technology.className}`}
-      initial={{
-        opacity: 0,
-        scale: 0.5,
-        y: 30,
-      }}
-      animate={{
-        opacity: 1,
-        scale: 1,
-        y: 0,
-      }}
-      transition={{
-        duration: 0.8,
-        delay: technology.delay,
-        type: "spring",
-        stiffness: 120,
-      }}
-    >
-      <motion.div
-        animate={{
-          y: [0, -10, 0],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        whileHover={{
-          scale: 1.12,
-          rotateY: 10,
-        }}
-        className="
-          group
-          relative
-          flex
-          min-w-[90px]
-          flex-col
-          items-center
-          justify-center
-          rounded-2xl
-          border
-          border-white/10
-          bg-[#11111c]/75
-          px-4
-          py-3
-          shadow-[0_15px_40px_rgba(0,0,0,0.35)]
-          backdrop-blur-xl
-        "
-      >
-        {/* Glow */}
-
-        <div
-          className="
-            pointer-events-none
-            absolute
-            inset-0
-            rounded-2xl
-            opacity-0
-            transition-opacity
-            duration-300
-            group-hover:opacity-100
-          "
-          style={{
-            background: `radial-gradient(
-              circle,
-              ${technology.color}30,
-              transparent 70%
-            )`,
-          }}
-        />
-
-        <Icon
-          className="relative z-10 mb-2 text-3xl"
-          style={{
-            color: technology.color,
-            filter: `drop-shadow(0 0 10px ${technology.color})`,
-          }}
-        />
-
-        <span className="relative z-10 text-[10px] font-semibold text-white/75">
-          {technology.name}
-        </span>
-      </motion.div>
-    </motion.div>
+    <instancedMesh ref={meshRef} args={[null, null, count]}>
+      <sphereGeometry args={[0.14, 8, 8]} />
+      <meshBasicMaterial color="#00f0ff" transparent opacity={0.7} />
+    </instancedMesh>
   );
-};
+}
 
-// ======================================================
-// ANIMATED BACKGROUND
-// ======================================================
+function Scene({ opening, cardsDone, mousePos }) {
+  useFrame(({ camera, clock }, delta) => {
+    const targetZ = opening ? 5.5 : cardsDone ? 17 : 25;
 
-const AnimatedBackground = () => {
+    camera.position.z = THREE.MathUtils.damp(
+      camera.position.z,
+      targetZ,
+      opening ? 0.8 : cardsDone ? 0.15 : 0.08,
+      delta
+    );
+
+    const targetX = (mousePos.x * 0.7) + Math.sin(clock.elapsedTime * 0.3) * 0.1;
+    const targetY = (-mousePos.y * 0.5) + Math.cos(clock.elapsedTime * 0.2) * 0.08;
+
+    camera.position.x = THREE.MathUtils.damp(camera.position.x, targetX, 0.1, delta);
+    camera.position.y = THREE.MathUtils.damp(camera.position.y, targetY, 0.1, delta);
+    camera.lookAt(0, 0, 0);
+  });
+
   return (
-    <div className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+    <>
+      <ambientLight intensity={0.9} />
+      <pointLight position={[0, 2, 4]} intensity={28} color="#ffaa33" distance={22} />
+      <pointLight position={[-6, 0, -2]} intensity={22} color="#00f0ff" distance={20} />
+      <pointLight position={[6, 0, -2]} intensity={22} color="#f59e0b" distance={20} />
 
-      {/* Grid */}
+      <EnergyParticles count={120} />
 
-      <div
-        className="
-          absolute
-          inset-0
-          opacity-[0.08]
-          [background-image:linear-gradient(rgba(255,255,255,0.3)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.3)_1px,transparent_1px)]
-          [background-size:70px_70px]
-        "
+      <Stars
+        radius={50}
+        depth={45}
+        count={950}
+        factor={3.5}
+        fade
+        speed={1.5}
       />
-
-      {/* Blue Glow */}
-
-      <motion.div
-        animate={{
-          x: ["-20%", "15%", "-20%"],
-          y: ["-10%", "10%", "-10%"],
-        }}
-        transition={{
-          duration: 14,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="
-          absolute
-          left-[5%]
-          top-[25%]
-          h-[400px]
-          w-[400px]
-          rounded-full
-          bg-cyan-500/10
-          blur-[120px]
-        "
-      />
-
-      {/* Purple Glow */}
-
-      <motion.div
-        animate={{
-          x: ["10%", "-10%", "10%"],
-          y: ["0%", "15%", "0%"],
-        }}
-        transition={{
-          duration: 16,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="
-          absolute
-          right-[10%]
-          top-[15%]
-          h-[500px]
-          w-[500px]
-          rounded-full
-          bg-fuchsia-600/10
-          blur-[130px]
-        "
-      />
-    </div>
+    </>
   );
-};
+}
 
-// ======================================================
-// NETWORK LINES
-// ======================================================
+export default function IntroScreen({ onEnter }) {
+  const [cardsDone, setCardsDone] = useState(false);
+  const [opening, setOpening] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-const NetworkLines = () => {
-  return (
-    <svg
-      className="
-        pointer-events-none
-        absolute
-        inset-0
-        z-[2]
-        h-full
-        w-full
-        opacity-30
-      "
-      viewBox="0 0 1440 900"
-      preserveAspectRatio="none"
-    >
-      <motion.path
-        d="
-          M0 130
-          L240 70
-          L400 160
-          L610 80
-          L820 180
-          L1030 90
-          L1240 150
-          L1440 80
-        "
-        fill="none"
-        stroke="rgba(255,255,255,0.16)"
-        strokeWidth="1"
-        strokeDasharray="5 8"
-        initial={{
-          pathLength: 0,
-        }}
-        animate={{
-          pathLength: 1,
-        }}
-        transition={{
-          duration: 3,
-        }}
-      />
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const { innerWidth, innerHeight } = window;
+      const x = (e.clientX / innerWidth - 0.5) * 2;
+      const y = (e.clientY / innerHeight - 0.5) * 2;
+      setMousePos({ x, y });
+    };
 
-      <motion.path
-        d="
-          M0 700
-          L190 620
-          L360 720
-          L540 610
-          L760 730
-          L940 620
-          L1180 700
-          L1440 580
-        "
-        fill="none"
-        stroke="rgba(255,255,255,0.12)"
-        strokeWidth="1"
-        strokeDasharray="4 10"
-        initial={{
-          pathLength: 0,
-        }}
-        animate={{
-          pathLength: 1,
-        }}
-        transition={{
-          duration: 4,
-          delay: 0.5,
-        }}
-      />
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
-      <circle
-        cx="240"
-        cy="70"
-        r="3"
-        fill="#ffffff"
-        opacity="0.5"
-      />
+  useEffect(() => {
+    // Reveal golden portal hero after all cards finish flying past user (~4.8s)
+    const timer = setTimeout(() => {
+      setCardsDone(true);
+    }, 4800);
 
-      <circle
-        cx="610"
-        cy="80"
-        r="3"
-        fill="#22d3ee"
-        opacity="0.7"
-      />
+    return () => clearTimeout(timer);
+  }, []);
 
-      <circle
-        cx="1030"
-        cy="90"
-        r="3"
-        fill="#d946ef"
-        opacity="0.7"
-      />
-    </svg>
-  );
-};
+  const handleSkip = () => {
+    setCardsDone(true);
+  };
 
-// ======================================================
-// SOCIAL LINKS
-// ======================================================
-
-const SocialLinks = () => {
-  return (
-    <motion.div
-      initial={{
-        opacity: 0,
-        y: -20,
-      }}
-      animate={{
-        opacity: 1,
-        y: 0,
-      }}
-      transition={{
-        delay: 1.3,
-      }}
-      className="
-        absolute
-        right-6
-        top-6
-        z-50
-        flex
-        items-center
-        gap-4
-        md:right-16
-      "
-    >
-      {socials.map((social) => {
-        const Icon = social.icon;
-
-        return (
-          <motion.a
-            key={social.label}
-            href={social.href}
-            target="_blank"
-            rel="noreferrer"
-            whileHover={{
-              y: -4,
-              scale: 1.15,
-            }}
-            whileTap={{
-              scale: 0.9,
-            }}
-            className="
-              flex
-              h-8
-              w-8
-              items-center
-              justify-center
-              text-sm
-              text-white/70
-              transition
-              hover:text-white
-            "
-          >
-            <Icon />
-          </motion.a>
-        );
-      })}
-    </motion.div>
-  );
-};
-
-// ======================================================
-// MAIN COMPONENT
-// ======================================================
-
-const IntroScreen = ({ onEnter }) => {
-  const [activeSection, setActiveSection] = useState(0);
-  const [isEntering, setIsEntering] = useState(false);
-
-  const handleEnter = () => {
-    setIsEntering(true);
-
-    window.setTimeout(() => {
-      onEnter?.();
-    }, 900);
+  const enter = () => {
+    if (opening) return;
+    setOpening(true);
+    window.setTimeout(() => onEnter?.(), 1000);
   };
 
   return (
-    <AnimatePresence mode="wait">
+    <main
+      className={`
+        journey
+        ${cardsDone ? "journey-ready" : "journey-flying"}
+        ${opening ? "journey-opening" : ""}
+      `}
+      style={{
+        "--mouse-x": mousePos.x,
+        "--mouse-y": mousePos.y,
+      }}
+    >
+      {/* Realistic Sci-Fi Server Room Corridor Background */}
+      <div className="journey-bg" aria-hidden="true" />
 
-      {!isEntering && (
-        <motion.main
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          exit={{
-            opacity: 0,
-            scale: 1.03,
-            filter: "blur(12px)",
-          }}
-          transition={{
-            duration: 0.9,
-          }}
-          className="
-            relative
-            h-[100dvh]
-            min-h-0
-            w-full
-            overflow-hidden
-            bg-[#0c055a]
-            font-sans
-            text-white
-          "
+      {/* Dynamic Neon Blue & Gold Energy Laser Paths Overlay */}
+      <svg className="energy-paths-svg" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="neonBlueGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#00f0ff" stopOpacity="0.8" />
+            <stop offset="50%" stopColor="#ec4899" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.9" />
+          </linearGradient>
+          <filter id="neonGlowFilter" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <path className="energy-path energy-path-1" d="M 0,200 Q 350,380 500,450 T 720,450" stroke="url(#neonBlueGoldGrad)" strokeWidth="2.5" fill="none" filter="url(#neonGlowFilter)" />
+        <path className="energy-path energy-path-2" d="M 0,720 Q 300,580 500,450" stroke="#00f0ff" strokeWidth="2" strokeDasharray="12 16" fill="none" filter="url(#neonGlowFilter)" />
+        <path className="energy-path energy-path-3" d="M 1440,200 Q 1090,380 940,450 T 720,450" stroke="url(#neonBlueGoldGrad)" strokeWidth="2.5" fill="none" filter="url(#neonGlowFilter)" />
+        <path className="energy-path energy-path-4" d="M 1440,720 Q 1140,580 940,450" stroke="#f59e0b" strokeWidth="2" strokeDasharray="12 16" fill="none" filter="url(#neonGlowFilter)" />
+      </svg>
+
+      {/* Three.js Particle Stars & Energy Beam Canvas */}
+      <div className="journey-canvas" aria-hidden="true">
+        <Canvas
+          camera={{ position: [0, 0, 17], fov: 63 }}
+          dpr={[1, 1.5]}
+          gl={{ antialias: false, alpha: true, powerPreference: "low-power" }}
         >
+          <Scene opening={opening} cardsDone={cardsDone} mousePos={mousePos} />
+        </Canvas>
+      </div>
 
-          {/* ================================================= */}
-          {/* FULL PAGE EXPLOSION BACKGROUND                     */}
-          {/* ================================================= */}
+      {/* Dark Cinematic Vignette */}
+      <div className="journey-vignette" aria-hidden="true" />
 
+      {/* Header Bar */}
+      <header className="journey-header">
+        <span>
+          CR<span className="journey-dot">.</span>
+        </span>
+        <span>CHANUKA RANDITHA / FULL STACK DEVELOPER</span>
+      </header>
+
+      {/* Left Column Floating Tech Cards (Fly past viewer's shoulder into background behind) */}
+      <div className="journey-cards-col journey-cards-left" aria-hidden="true">
+        {technologiesLeft.map((tech) => (
           <div
-            className="
-              pointer-events-none
-              absolute
-              inset-0
-              z-0
-              overflow-hidden
-            "
+            key={tech.name}
+            className="tech-card tech-card-left"
+            style={{
+              "--border-color": tech.borderColor,
+              "--glow-color": tech.glowColor,
+              "--badge-bg": tech.badgeBg,
+              "--card-delay": `${tech.delay}s`,
+            }}
           >
-            <img
-              src="/images/bg-explosion.png"
-              alt=""
-              className="
-                absolute
-                inset-0
-                h-full
-                w-full
-                object-cover
-                object-center
-                opacity-70
-              "
-            />
-
-            {/* Dark overlay */}
-
-            <div
-              className="
-                absolute
-                inset-0
-                bg-[#080800]/40
-              "
-            />
-
-            {/* Extra gradient */}
-
-            <div
-              className="
-                absolute
-                inset-0
-                bg-gradient-to-r
-                from-[#07101d]/65
-                via-transparent
-                to-[#190718]/40
-              "
-            />
-          </div>
-
-          {/* ================================================= */}
-          {/* ANIMATED BACKGROUND                                */}
-          {/* ================================================= */}
-
-          <AnimatedBackground />
-
-          <NetworkLines />
-
-          {/* ================================================= */}
-          {/* LOGO                                                */}
-          {/* ================================================= */}
-
-          <motion.div
-            initial={{
-              opacity: 0,
-              x: -40,
-            }}
-            animate={{
-              opacity: 1,
-              x: 0,
-            }}
-            transition={{
-              duration: 0.8,
-            }}
-            className="
-              absolute
-              left-6
-              top-6
-              z-50
-              md:left-16
-              md:top-7
-            "
-          >
-            <div className="flex items-center">
-
-              <span
-                className="
-                  text-3xl
-                  font-bold
-                  tracking-tight
-                  md:text-4xl
-                "
-              >
-                Chanuka
-              </span>
-
-              <span
-                className="
-                  ml-1
-                  text-3xl
-                  font-light
-                  tracking-tight
-                  text-white/70
-                  md:text-4xl
-                "
-              >
-                randitha
-              </span>
-
-              <span
-                className="
-                  ml-1
-                  h-1.5
-                  w-1.5
-                  rounded-full
-                  bg-red-500
-                  shadow-[0_0_15px_rgba(239,68,68,0.9)]
-                "
-              />
-
+            <div className="tech-icon-wrapper">
+              <tech.Icon />
             </div>
-          </motion.div>
+            <div className="tech-text-wrapper">
+              <span className="tech-name">{tech.name}</span>
+              <span className="tech-role">{tech.role}</span>
+            </div>
+          </div>
+        ))}
+      </div>
 
-          {/* ================================================= */}
-          {/* SOCIAL ICONS                                        */}
-          {/* ================================================= */}
-
-          <SocialLinks />
-
-          {/* ================================================= */}
-          {/* TECHNOLOGY CARDS                                    */}
-          {/* ================================================= */}
-
+      {/* Right Column Floating Tech Cards (Fly past viewer's shoulder into background behind) */}
+      <div className="journey-cards-col journey-cards-right" aria-hidden="true">
+        {technologiesRight.map((tech) => (
           <div
-            className="
-              pointer-events-none
-              absolute
-              inset-0
-              hidden
-              lg:block
-            "
+            key={tech.name}
+            className="tech-card tech-card-right"
+            style={{
+              "--border-color": tech.borderColor,
+              "--glow-color": tech.glowColor,
+              "--badge-bg": tech.badgeBg,
+              "--card-delay": `${tech.delay}s`,
+            }}
           >
-            {technologies.map((technology) => (
-              <TechCard
-                key={technology.name}
-                technology={technology}
-              />
-            ))}
-          </div>
-
-          {/* ================================================= */}
-          {/* MAIN CONTENT                                       */}
-          {/* ================================================= */}
-
-          <section
-            className="
-              relative
-              z-30
-              mx-auto
-              flex
-              h-full
-              min-h-0
-              items-center
-              overflow-hidden
-              px-6
-              pt-28
-              md:px-16
-              lg:pt-10
-            "
-          >
-
-            <div
-              className="
-                grid
-                h-full
-                min-h-0
-                w-full
-                grid-cols-1
-                items-center
-                gap-8
-                lg:grid-cols-[0.95fr_1.05fr]
-              "
-            >
-
-              {/* ================================================= */}
-              {/* LEFT CONTENT                                       */}
-              {/* ================================================= */}
-
-              <div
-                className="
-                  relative
-                  z-40
-                  max-w-2xl
-                "
-              >
-
-                {/* Small title */}
-
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    y: 25,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  transition={{
-                    delay: 0.3,
-                  }}
-                  className="
-                    mb-5
-                    text-sm
-                    font-medium
-                    text-white/65
-                    md:text-base
-                  "
-                >
-                  Full Stack Developer
-
-                  <span className="mx-2 text-white/30">
-                    |
-                  </span>
-
-                  Building Digital Experiences
-                </motion.div>
-
-                {/* Main Heading */}
-
-                <motion.h1
-                  initial={{
-                    opacity: 0,
-                    y: 50,
-                    filter: "blur(10px)",
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                    filter: "blur(0px)",
-                  }}
-                  transition={{
-                    delay: 0.45,
-                    duration: 1,
-                  }}
-                  className="
-                    text-5xl
-                    font-black
-                    leading-[0.9]
-                    tracking-[-0.05em]
-                    sm:text-6xl
-                    md:text-7xl
-                    lg:text-[78px]
-                    xl:text-[88px]
-                  "
-                >
-                </motion.h1>
-
-                {/* Gradient Line */}
-
-                <motion.div
-                  initial={{
-                    width: 0,
-                  }}
-                  animate={{
-                    width: 120,
-                  }}
-                  transition={{
-                    delay: 1,
-                    duration: 0.8,
-                  }}
-                  className="
-                    mt-7
-                    h-[3px]
-                    rounded-full
-                    bg-gradient-to-r
-                    from-cyan-400
-                    to-fuchsia-500
-                  "
-                />
-
-                {/* Description */}
-
-                <motion.p
-                  initial={{
-                    opacity: 0,
-                    y: 25,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  transition={{
-                    delay: 1,
-                    duration: 0.8,
-                  }}
-                  className="
-                    mt-7
-                    max-w-xl
-                    text-sm
-                    leading-7
-                    text-white/70
-                    sm:text-base
-                    md:text-lg
-                  "
-                >
-                  developed Crafting seamless web and mobile applications
-                </motion.p>
-
-                {/* CTA */}
-
-                <motion.button
-                  type="button"
-                  onClick={handleEnter}
-                  initial={{
-                    opacity: 0,
-                    y: 30,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  transition={{
-                    delay: 1.25,
-                    duration: 0.8,
-                  }}
-                  whileHover={{
-                    scale: 1.05,
-                  }}
-                  whileTap={{
-                    scale: 0.96,
-                  }}
-                  className="
-                    group
-                    relative
-                    mt-9
-                    overflow-hidden
-                    rounded-full
-                    p-[1px]
-                  "
-                >
-
-                  {/* Border */}
-
-                  <span
-                    className="
-                      absolute
-                      inset-0
-                      rounded-full
-                      bg-gradient-to-r
-                      from-cyan-400
-                      via-blue-500
-                      to-fuchsia-500
-                    "
-                  />
-
-                  {/* Moving shine */}
-
-                  <motion.span
-                    animate={{
-                      x: ["-120%", "220%"],
-                    }}
-                    transition={{
-                      duration: 2.2,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    className="
-                      absolute
-                      inset-y-0
-                      w-12
-                      rotate-12
-                      bg-white/50
-                      blur-lg
-                    "
-                  />
-
-                  <span
-                    className="
-                      relative
-                      flex
-                      items-center
-                      gap-4
-                      rounded-full
-                      bg-[#10101b]
-                      px-8
-                      py-4
-                      text-sm
-                      font-bold
-                      md:px-10
-                      md:text-base
-                    "
-                  >
-                    Enter Portfolio
-
-                    <motion.span
-                      animate={{
-                        x: [0, 5, 0],
-                      }}
-                      transition={{
-                        duration: 1.2,
-                        repeat: Infinity,
-                      }}
-                    >
-                      <FiArrowRight className="text-lg" />
-                    </motion.span>
-                  </span>
-
-                </motion.button>
-
-                {/* Interactive text */}
-
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                  }}
-                  animate={{
-                    opacity: 1,
-                  }}
-                  transition={{
-                    delay: 2,
-                  }}
-                  className="
-                    mt-8
-                    flex
-                    items-center
-                    gap-3
-                    text-[10px]
-                    uppercase
-                    tracking-[0.3em]
-                    text-white/35
-                  "
-                >
-                  <span className="h-px w-8 bg-white/20" />
-
-                  Interactive Experience
-
-                  <span className="h-px w-8 bg-white/20" />
-                </motion.div>
-
-              </div>
-
-              {/* ================================================= */}
-              {/* RIGHT PORTRAIT                                     */}
-              {/* ================================================= */}
-
-              <div
-                className="
-                  relative
-                  flex
-                  h-full
-                  min-h-0
-                  items-end
-                  justify-center
-                  overflow-visible
-                  lg:min-h-0
-                "
-              >
-
-                {/* Red glow */}
-
-                <motion.div
-                  animate={{
-                    scale: [1, 1.08, 1],
-                    opacity: [0.4, 0.7, 0.4],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="
-                    absolute
-                    right-[10%]
-                    top-[20%]
-                    h-[400px]
-                    w-[400px]
-                    rounded-full
-                    bg-red-600/25
-                    blur-[100px]
-                  "
-                />
-
-                {/* Orbit */}
-
-                <motion.div
-                  animate={{
-                    rotate: 360,
-                  }}
-                  transition={{
-                    duration: 22,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="
-                    absolute
-                    right-[2%]
-                    top-[12%]
-                    h-[500px]
-                    w-[500px]
-                    rounded-full
-                    border
-                    border-white/10
-                    border-dashed
-                    lg:h-[650px]
-                    lg:w-[650px]
-                  "
-                >
-                  <span
-                    className="
-                      absolute
-                      left-1/2
-                      top-0
-                      h-2
-                      w-2
-                      -translate-x-1/2
-                      rounded-full
-                      bg-cyan-400
-                      shadow-[0_0_20px_#22d3ee]
-                    "
-                  />
-                </motion.div>
-
-                {/* ================================================= */}
-                {/* PORTRAIT                                           */}
-                {/* ================================================= */}
-
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    scale: 0.8,
-                    x: 80,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    x: 0,
-                  }}
-                  transition={{
-                    delay: 0.5,
-                    duration: 1.2,
-                  }}
-                  className="
-                    relative
-                    z-20
-                    flex
-                    h-[calc(100dvh-120px)]
-                    max-h-[720px]
-                    w-full
-                    max-w-[560px]
-                    items-end
-                    justify-center
-                    lg:h-[calc(100dvh-20px)]
-                    lg:max-h-[720px]
-                  "
-                >
-
-                  {/* Portrait glow */}
-
-                  <div
-                    className="
-                      absolute
-                      inset-x-[10%]
-                      bottom-0
-                      top-[12%]
-                      rounded-[50%]
-                      bg-gradient-to-t
-                      from-red-600/30
-                      via-red-500/10
-                      to-transparent
-                      blur-2xl
-                    "
-                  />
-
-                  {/* YOUR PORTRAIT */}
-
-                  <motion.img
-                    src="/images/chanuka.png"
-                    alt="Chanuka Randitha"
-                    animate={{
-                      y: [0, -8, 0],
-                    }}
-                    transition={{
-                      duration: 5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="
-                      absolute
-                      bottom-0
-                      left-1/2
-                      h-full
-                      w-full
-                      -translate-x-1/2
-                      object-contain
-                      object-bottom
-                      drop-shadow-[0_20px_50px_rgba(0,0,0,0.6)]
-                    "
-                  />
-
-                  {/* Code Badge */}
-
-                 <motion.div
-                    initial={{
-                      opacity: 0,
-                      scale: 0.8,
-                      x: 80,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      scale: 1,
-                      x: 0,
-                    }}
-                    transition={{
-                      delay: 0.5,
-                      duration: 1.2,
-                    }}
-                    className="
-                      relative
-                      z-20
-                      flex
-                      h-[100dvh]
-                      max-h-[100dvh]
-                      w-full
-                      max-w-[560px]
-                      items-end
-                      justify-center
-                    "
-                  >
-                    <div className="flex items-center gap-2">
-                      <FiCode />
-
-                      <span>
-                        build.digital()
-                      </span>
-                    </div>
-                  </motion.div>
-
-                </motion.div>
-
-              </div>
-
+            <div className="tech-icon-wrapper">
+              <tech.Icon />
             </div>
+            <div className="tech-text-wrapper">
+              <span className="tech-name">{tech.name}</span>
+              <span className="tech-role">{tech.role}</span>
+            </div>
+          </div>
+        ))}
+      </div>
 
-          </section>
+      {/* Center Server Room Portal Hero Section */}
+      <div className={`journey-center-hero ${cardsDone ? "hero-visible" : "hero-hidden"}`}>
+        <h1 className="hero-name">
+          <span className="name-line">CHANUKA</span>
+          <span className="name-line">RANDITHA</span>
+        </h1>
+        <p className="hero-role">FULL STACK DEVELOPER</p>
+        <div className="hero-accent-bar" />
 
+        <button
+          type="button"
+          className="hero-enter-btn"
+          onClick={enter}
+        >
+          <span>Enter Portfolio</span>
+          <span className="btn-arrow" aria-hidden="true">
+            →
+          </span>
+        </button>
+      </div>
 
-          {/* ================================================= */}
-          {/* BOTTOM LINE                                        */}
-          {/* ================================================= */}
-
-          <motion.div
-            initial={{
-              scaleX: 0,
-            }}
-            animate={{
-              scaleX: 1,
-            }}
-            transition={{
-              delay: 1.2,
-              duration: 1,
-            }}
-            className="
-              absolute
-              bottom-0
-              left-1/2
-              z-40
-              h-px
-              w-3/4
-              -translate-x-1/2
-              bg-gradient-to-r
-              from-transparent
-              via-cyan-400/60
-              to-transparent
-            "
-          />
-
-        </motion.main>
+      {/* Skip Intro Button */}
+      {!cardsDone && (
+        <button
+          type="button"
+          className="journey-skip-btn"
+          onClick={handleSkip}
+        >
+          Skip intro →
+        </button>
       )}
-
-    </AnimatePresence>
+    </main>
   );
-};
-
-export default IntroScreen;
+}
