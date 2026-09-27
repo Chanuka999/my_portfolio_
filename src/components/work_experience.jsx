@@ -85,6 +85,11 @@ const experiences = [
           "Worked on inventory, GRN, billing, stock, product and load-unload management features.",
       },
       {
+        name: "Hotel Management System",
+        description:
+          "Developed both frontend and backend features using Angular and Laravel, including hotel configuration, room management, reservations, billing, payments, staff roles and permissions, and reporting.",
+      },
+      {
         name: "NIHS Medical Museum System",
         description:
           "Contributed to equipment, category, era, image and user-management functionality.",
